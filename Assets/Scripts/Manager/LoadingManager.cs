@@ -12,5 +12,6 @@ public class LoadingManager : MonoBehaviour, IManagerBase
     public IEnumerator Initialize()
     {
         yield return null;
+        DIContainer.Register(this);
     }
 }
