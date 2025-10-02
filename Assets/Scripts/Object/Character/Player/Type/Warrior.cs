@@ -1,9 +1,6 @@
 using UnityEngine;
 
-public class Warrior : CharacterBase
+public class Warrior :PlayerBase
 {
-    private void Start()
-    {
-        Initialize();
-    }
+
 }

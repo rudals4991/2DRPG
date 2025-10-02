@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class SkillNode : NodeBase
 {
-    private readonly CharacterBase character;
-    public SkillNode(CharacterBase character) => this.character = character;
+    private readonly PlayerBase player;
+    public SkillNode(PlayerBase player) => this.player = player;
     public override bool Execute()
     {
+        player.PlayerSkill.UseSkill();
         return true;
     }
 }

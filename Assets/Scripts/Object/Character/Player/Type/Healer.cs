@@ -1,9 +1,5 @@
 using UnityEngine;
 
-public class Healer : CharacterBase
+public class Healer : PlayerBase
 {
-    private void Start()
-    {
-        Initialize();
-    }
 }

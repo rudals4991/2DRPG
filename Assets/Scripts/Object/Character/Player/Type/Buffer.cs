@@ -1,9 +1,5 @@
 using UnityEngine;
 
-public class Buffer : CharacterBase
+public class Buffer : PlayerBase
 {
-    private void Start()
-    {
-        Initialize();
-    }
 }

@@ -1,10 +1,5 @@
 using UnityEngine;
 
-public class Tanker : CharacterBase
+public class Tanker : PlayerBase
 {
-    //TODO 
-    private void Start()
-    {
-        Initialize();
-    }
 }

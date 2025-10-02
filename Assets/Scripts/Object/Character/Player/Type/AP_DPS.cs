@@ -1,9 +1,5 @@
 using UnityEngine;
 
-public class AP_DPS : CharacterBase
+public class AP_DPS : PlayerBase
 {
-    private void Start()
-    {
-        Initialize();
-    }
 }
