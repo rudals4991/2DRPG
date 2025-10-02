@@ -6,7 +6,7 @@ public class AttackNode : NodeBase
     public AttackNode(CharacterBase character) => this.character = character;
     public override bool Execute()
     {
-        //TODO: Attack 로직 구현
+        character.Attack.Attack();
         return true;
     }
 }

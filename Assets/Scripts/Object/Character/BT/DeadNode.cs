@@ -6,7 +6,7 @@ public class DeadNode : NodeBase
     public DeadNode(CharacterBase character) => this.character = character;
     public override bool Execute()
     {
-        //TODO: Dead 로직 구현
+        character.Dead.Die();
         return true;
     }
 }

@@ -6,7 +6,7 @@ public class HitNode : NodeBase
     public HitNode(CharacterBase character) => this.character = character;
     public override bool Execute()
     {
-        //TODO: Hit 로직 구현
+        character.Damaged.GetDamage();
         return true;
     }
 }

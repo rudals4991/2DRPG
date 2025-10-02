@@ -6,6 +6,5 @@ public class Tanker : CharacterBase
     private void Start()
     {
         Initialize();
-        Debug.Log($"My Name is {Name}");
     }
 }

@@ -7,7 +7,7 @@ public class IDLENode : NodeBase
 
     public override bool Execute()
     {
-        //TODO: IDLE ·ÎÁ÷
+        character.IDLE.IDLE();
         return true;
     }
 }

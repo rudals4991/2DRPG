@@ -6,7 +6,7 @@ public class MoveNode : NodeBase
     public MoveNode(CharacterBase character) => this.character = character;
     public override bool Execute()
     {
-        //TODO: Move 로직 구현
+        character.Move.Move();
         return true;
     }
 }
