@@ -4,9 +4,10 @@ public class MoveNode : NodeBase
 {
     private readonly CharacterBase character;
     public MoveNode(CharacterBase character) => this.character = character;
-    public override bool Execute()
+    public override NodeStatus Execute()
     {
-        character.Move.Move();
-        return true;
+        if (character.Move is null) return NodeStatus.Fail;
+        bool isMoving = character.Move.Move();
+        return isMoving ? NodeStatus.Running : NodeStatus.Success;
     }
 }

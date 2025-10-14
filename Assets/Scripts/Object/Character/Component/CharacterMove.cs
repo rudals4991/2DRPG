@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CharacterMove : MonoBehaviour
 {
-    public void Move()
-    { 
-        
+    public bool Move()
+    {
+        return true;
     }
 }

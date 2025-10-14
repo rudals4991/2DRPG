@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class SkillNode : NodeBase
 {
-    private readonly PlayerBase player;
-    public SkillNode(PlayerBase player) => this.player = player;
-    public override bool Execute()
+    private readonly CharacterBase c;
+    public SkillNode(CharacterBase c) => this.c = c;
+    public override NodeStatus Execute()
     {
-        player.PlayerSkill.UseSkill();
-        return true;
+        var player = c as PlayerBase;
+        if (player is null) return NodeStatus.Fail;
+        return player.TryCastSkill() ? NodeStatus.Success : NodeStatus.Fail;
     }
 }

@@ -4,9 +4,10 @@ public class DeadNode : NodeBase
 {
     private readonly CharacterBase character;
     public DeadNode(CharacterBase character) => this.character = character;
-    public override bool Execute()
+    public override NodeStatus Execute()
     {
+        if (character.Dead is null)return NodeStatus.Fail;
         character.Dead.Die();
-        return true;
+        return NodeStatus.Running;
     }
 }
