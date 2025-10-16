@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class CharacterBase : MonoBehaviour
+public abstract class CharacterBase : MonoBehaviour,IDamagable
 {
     [SerializeField] protected CharacterData data;
     public CharacterMove Move { get; private set; }
@@ -26,12 +26,16 @@ public abstract class CharacterBase : MonoBehaviour
         status = new CharacterStatus(data);
         _attackCoolTime = 0f;
         //TODO: 데미지 이벤트 연동
+        Damaged.OnDamaged -= OnDamaged;
+        Damaged.OnDamaged += OnDamaged;
     }
     public virtual void Tick(float dt)
     {
         if (_attackCoolTime > 0f) _attackCoolTime -= dt;
         status.SetCanAttack(_attackCoolTime <= 0);
         //TODO: 피격 무적 연동
+        Damaged?.Tick(dt);
+        if (status.IsHit && (Damaged?.IsInvincibleOver() ?? true)) status.SetHit(false);
     }
     public bool TryStartAttack()
     {
@@ -44,6 +48,11 @@ public abstract class CharacterBase : MonoBehaviour
     private void OnDamaged(int dmg)
     {
         status.TakeDamage(dmg);
+    }
+    public void ApplyDamage(int damage)
+    { 
+        //인터페이스 호출용
+        Damaged.ApplyDamage(damage);
     }
     private void OnDead()
     {

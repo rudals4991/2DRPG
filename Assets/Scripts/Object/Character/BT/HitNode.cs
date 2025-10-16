@@ -7,9 +7,7 @@ public class HitNode : NodeBase
     public override NodeStatus Execute()
     {
         if (character.Damaged is null) return NodeStatus.Fail;
-
-        character.Damaged.GetDamage();
-        character.Status.SetHit(false); // 피격 플래그 해제
+        character.Damaged.GetDamaged();
         return NodeStatus.Success;
     }
 }

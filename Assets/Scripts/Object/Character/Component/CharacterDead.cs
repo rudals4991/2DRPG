@@ -4,6 +4,6 @@ public class CharacterDead : MonoBehaviour
 {
     public void Die()
     { 
-    
+        //ø¨√‚
     }
 }
