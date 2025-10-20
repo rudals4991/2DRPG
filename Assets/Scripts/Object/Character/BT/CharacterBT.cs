@@ -7,7 +7,7 @@ public class CharacterBT
     public CharacterBT(CharacterBase character, Transform target)
     {
         var idle = new IDLENode(character);
-        var move = new MoveNode(character);
+        var move = new MoveNode(character,target);
         var attack = new AttackNode(character,target);
         var skill = new SkillNode(character);
         var hit = new HitNode(character);
