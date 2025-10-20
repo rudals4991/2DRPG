@@ -43,6 +43,7 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
         if (Attack is null) return false; //TODO: 실제 공격 로직 추가
         _attackCoolTime = attackCoolTime;
         status.SetCanAttack(false);
+        Attack.Attack();
         return true;
     }
     private void OnDamaged(int dmg)
