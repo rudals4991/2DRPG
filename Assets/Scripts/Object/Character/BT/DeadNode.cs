@@ -7,6 +7,7 @@ public class DeadNode : NodeBase
     public override NodeStatus Execute()
     {
         if (character.Dead is null)return NodeStatus.Fail;
+        character.Animator.SetTrigger("Death");
         character.Dead.Die();
         return NodeStatus.Running;
     }

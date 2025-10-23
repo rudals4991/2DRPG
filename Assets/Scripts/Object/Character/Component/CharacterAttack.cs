@@ -6,7 +6,6 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] protected int attackDamage = 10;
     public void Attack()
     {
-        //TODO: Animator, Audio 추후 구현
         Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, attackRange);
         foreach (var target in targets)
         {

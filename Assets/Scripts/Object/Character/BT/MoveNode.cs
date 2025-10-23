@@ -23,7 +23,7 @@ public class MoveNode : NodeBase
             character.Move.Stop();
             return NodeStatus.Success;
         }
-        
+        character.Animator.SetTrigger("Move");
         character.Move.Move(target.position);
         return NodeStatus.Running;
     }

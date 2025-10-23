@@ -8,6 +8,7 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
     public CharacterDamaged Damaged { get; private set; }
     public CharacterDead Dead { get; private set; }
     public CharacterIDLE IDLE { get; private set; }
+    public Animator Animator { get; private set; }
 
     protected CharacterStatus status;
     public CharacterStatus Status => status;
@@ -18,6 +19,7 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
 
     public virtual void Initialize()                         // √ ±‚»≠
     {
+        Animator = GetComponentInChildren<Animator>();
         Move = GetComponent<CharacterMove>();
         Attack = GetComponent<CharacterAttack>();
         Damaged = GetComponent<CharacterDamaged>();

@@ -7,6 +7,7 @@ public class HitNode : NodeBase
     public override NodeStatus Execute()
     {
         if (character.Damaged is null) return NodeStatus.Fail;
+        character.Animator.SetTrigger("Damaged");
         character.Damaged.GetDamaged();
         return NodeStatus.Success;
     }
