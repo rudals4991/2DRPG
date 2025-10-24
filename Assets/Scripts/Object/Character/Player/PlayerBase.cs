@@ -12,7 +12,7 @@ public class PlayerBase : CharacterBase
     [SerializeField] float skillCoolTime = 5f;
     float _skillCoolTime;
     public PlayerSkill PlayerSkill { get; private set; }
-
+    public PlayerStatus PlayerStatus => status as PlayerStatus;
     public bool IsSkillOffCooldown => _skillCoolTime <= 0f;
     public bool CanUseSkill        // MP + 쿨타임 모두 충족
     {
@@ -22,7 +22,6 @@ public class PlayerBase : CharacterBase
             return ps != null && ps.CanUseSkill && IsSkillOffCooldown;
         }
     }
-
     public override void Initialize()
     {
         base.Initialize();
@@ -42,7 +41,7 @@ public class PlayerBase : CharacterBase
         var ps = status as PlayerStatus;
         if (ps == null || !ps.CanUseSkill) return false;
         if (PlayerSkill == null) return false;
-
+        Animator.SetTrigger("Skill");
         // 실제 스킬 수행
         if (!PlayerSkill.UseSkill()) return false;
 

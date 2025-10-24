@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
         { 
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            Debug.Log("GameManager On");
             InitializeManagers();
         }
     }
@@ -33,5 +32,9 @@ public class GameManager : MonoBehaviour
     private void ExitManagers()
     { 
         ManagerInitializer.ExitAll();
+    }
+    private void Update()
+    {
+        characterManager.TickAll(Time.deltaTime);
     }
 }
