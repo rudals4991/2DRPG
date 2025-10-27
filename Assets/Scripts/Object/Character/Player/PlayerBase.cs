@@ -34,6 +34,13 @@ public class PlayerBase : CharacterBase
         base.Tick(dt);
         if (_skillCoolTime > 0) _skillCoolTime -= dt;
     }
+    public void OnAttackSuccess()
+    {
+        var ps = status as PlayerStatus;
+        if (ps == null) return;
+
+        ps.GetMp(10);
+    }
     public bool TryCastSkill()
     {
         if (!Status.IsAlive || !IsSkillOffCooldown) return false;

@@ -13,7 +13,7 @@ public class PlayerStatus : CharacterStatus
     public PlayerStatus(CharacterData data, int maxMp, int cost, float criticalRate, int skillMp) : base(data)
     {
         MaxMp = maxMp;
-        NowMp = MaxMp;
+        NowMp = 0;
         Level = 1;
         Cost = cost;
         CriticalRate = criticalRate;

@@ -29,6 +29,7 @@ public class CharacterStatus
         if (!IsAlive) return 0;
         int deal = Math.Max(0, Math.Min(damage, nowHp));
         nowHp = Math.Max(0, nowHp - deal);
+        
         if (nowHp <= 0) Kill();
         IsHit = true;
         return deal;

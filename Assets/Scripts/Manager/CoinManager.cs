@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CoinManager : MonoBehaviour, IManagerBase
 {
-    public int Priority => 3;
+    public int Priority => 8;
 
     public void Exit()
     {

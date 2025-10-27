@@ -11,7 +11,6 @@ public static class ManagerInitializer
         foreach (var manager in managers)
         {
             yield return manager.Initialize();
-            Debug.Log($"{manager} is Initialzed");
         }
     }
     public static void ExitAll()

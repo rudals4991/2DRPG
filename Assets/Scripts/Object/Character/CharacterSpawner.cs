@@ -18,7 +18,7 @@ public class CharacterSpawner : MonoBehaviour
     {
         foreach (PlayerBase player in players)
         {
-            var p = Instantiate(player, Vector3.zero, Quaternion.identity);
+            var p = Instantiate(player, Vector3.zero,new Quaternion(0,-180,0,0));
             p.Initialize();
         }
     }
@@ -26,7 +26,8 @@ public class CharacterSpawner : MonoBehaviour
     {
         foreach (CharacterBase monster in monsters)
         {
-            var m = Instantiate(monster, new Vector3(2, 0, 0), Quaternion.identity);
+            var m = Instantiate(monster, new Vector3(15, 0, 0), Quaternion.identity);
+            m.Initialize();
         }
     }
 }

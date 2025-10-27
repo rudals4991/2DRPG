@@ -3,28 +3,27 @@ using UnityEngine;
 public class MoveNode : NodeBase
 {
     private readonly CharacterBase character;
-    private readonly Transform target;
-    public MoveNode(CharacterBase character, Transform target)
+    public MoveNode(CharacterBase character)
     {
         this.character = character;
-        this.target = target;
+        NodeName = "Move";
     }
     public override NodeStatus Execute()
     {
-        if (character.Move is null) return NodeStatus.Fail;
-        if (target is null)
+        if (character.Move is null) return LogAndReturn( NodeStatus.Fail);
+        if (character.Target is null)
         {
             character.Move.Stop();
-            return NodeStatus.Fail;
+            return LogAndReturn(NodeStatus.Fail);
         }
-        float dist = Vector2.Distance(character.transform.position, target.position);
+        float dist = Vector2.Distance(character.transform.position, character.Target.transform.position);
         if (dist <= character.Attack.attackRange)
         {
             character.Move.Stop();
-            return NodeStatus.Success;
+            return LogAndReturn(NodeStatus.Success);
         }
         character.Animator.SetTrigger("Move");
-        character.Move.Move(target.position);
-        return NodeStatus.Running;
+        character.Move.Move(character.Target.transform.position);
+        return LogAndReturn(NodeStatus.Running);
     }
 }

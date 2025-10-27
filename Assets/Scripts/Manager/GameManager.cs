@@ -1,13 +1,16 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     AudioManager audioManager;
     CharacterManager characterManager;
+    TargetManager targetManager;
     CoinManager coinManager;
     LoadingManager loadingManager;
     PoolManager poolManager;
     UIManager uiManager;
+    bool isInitialized = false;
     public static GameManager Instance { get; private set; }
     private void Awake()
     {
@@ -23,11 +26,17 @@ public class GameManager : MonoBehaviour
     {
         audioManager ??= GetComponent<AudioManager>() ?? gameObject.AddComponent<AudioManager>();
         characterManager ??= GetComponent<CharacterManager>() ?? gameObject.AddComponent<CharacterManager>();
-        coinManager ??= GetComponent<CoinManager>() ?? gameObject.AddComponent<CoinManager>();
+        targetManager ??= GetComponent<TargetManager>() ?? gameObject.AddComponent<TargetManager>();
         loadingManager ??= GetComponent<LoadingManager>() ?? gameObject.AddComponent<LoadingManager>();
         poolManager ??= GetComponent<PoolManager>() ?? gameObject.AddComponent<PoolManager>();
         uiManager ??= GetComponent<UIManager>() ?? gameObject.AddComponent<UIManager>();
-        StartCoroutine(ManagerInitializer.InitializeAll());
+        coinManager ??= GetComponent<CoinManager>() ?? gameObject.AddComponent<CoinManager>();
+        StartCoroutine(Flag());
+    }
+    private IEnumerator Flag()
+    {
+        yield return StartCoroutine(ManagerInitializer.InitializeAll());
+        isInitialized = true;
     }
     private void ExitManagers()
     { 
@@ -35,6 +44,9 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        characterManager.TickAll(Time.deltaTime);
+        if (!isInitialized) return;
+        float dt = Time.deltaTime;
+        targetManager.Tick(dt);
+        characterManager.TickAll(dt);
     }
 }

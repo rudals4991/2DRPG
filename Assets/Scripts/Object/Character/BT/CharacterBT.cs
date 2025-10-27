@@ -1,14 +1,15 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterBT
 {
     private NodeBase root;
-    public CharacterBT(CharacterBase character, Transform target)
+    public CharacterBT(CharacterBase character)
     {
         var idle = new IDLENode(character);
-        var move = new MoveNode(character,target);
-        var attack = new AttackNode(character,target);
+        var move = new MoveNode(character);
+        var attack = new AttackNode(character);
         var skill = new SkillNode(character);
         var hit = new HitNode(character);
         var dead = new DeadNode(character);
@@ -20,8 +21,8 @@ public class CharacterBT
 
         var isTargetInRange = new ConditionNode(() =>
         {
-            if (target == null) return false;
-            float dist = Vector2.Distance(character.transform.position, target.position);
+            if (character.Target == null) return false;
+            float dist = Vector2.Distance(character.transform.position, character.Target.transform.position);
             return dist <= character.Attack.attackRange;
         });
 

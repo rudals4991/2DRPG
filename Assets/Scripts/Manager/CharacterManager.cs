@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterManager : MonoBehaviour, IManagerBase
 {
     private readonly List<CharacterBase> characters = new();
+    public IReadOnlyList<CharacterBase> AllCharacters => characters;
     public int Priority => 2;
     CharacterSpawner spawner;
     public void Exit()
@@ -22,6 +23,7 @@ public class CharacterManager : MonoBehaviour, IManagerBase
     {
         if (!characters.Contains(c))
             characters.Add(c);
+        Debug.Log($"[CharacterManager] Registered: {c.name}");
     }
     public void Unregister(CharacterBase c)
     {
