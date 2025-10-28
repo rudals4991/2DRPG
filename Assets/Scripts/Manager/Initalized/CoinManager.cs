@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour, IManagerBase
+public class CoinManager : MonoBehaviour, IManagerBase
 {
-    public int Priority => 6;
+    public int Priority => 4;
 
     public void Exit()
     {
@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour, IManagerBase
 
     public IEnumerator Initialize()
     {
-        yield return null;
         DIContainer.Register(this);
+        yield return null;
     }
 }

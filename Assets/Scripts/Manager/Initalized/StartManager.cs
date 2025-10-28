@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class LoadingManager : MonoBehaviour, IManagerBase
+public class StartManager : MonoBehaviour, IManagerBase
 {
-    public int Priority => 4;
+    public int Priority => 10;
 
     public void Exit()
     {
@@ -11,7 +11,7 @@ public class LoadingManager : MonoBehaviour, IManagerBase
 
     public IEnumerator Initialize()
     {
-        yield return null;
         DIContainer.Register(this);
+        yield return null;
     }
 }

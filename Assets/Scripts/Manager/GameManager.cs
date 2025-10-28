@@ -3,13 +3,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    AudioManager audioManager;
-    CharacterManager characterManager;
-    TargetManager targetManager;
-    CoinManager coinManager;
-    LoadingManager loadingManager;
-    PoolManager poolManager;
-    UIManager uiManager;
+    PoolManager poolManager;                //1
+    AudioManager audioManager;              //2
+    UIManager uiManager;                    //3
+    CoinManager coinManager;                //4
+    CharacterManager characterManager;      //5
+    TargetManager targetManager;            //6
+    PartyDataManager partyDataManager;      //7
+    DungeonDataManager dungeonDataManager;  //8
+    DungeonManager dungeonManager;          //9
+    StartManager startManager;              //10
+    LoadingManager loadingManager;          //11
+    
+    
     bool isInitialized = false;
     public static GameManager Instance { get; private set; }
     private void Awake()
@@ -24,13 +30,18 @@ public class GameManager : MonoBehaviour
     }
     private void InitializeManagers()
     {
-        audioManager ??= GetComponent<AudioManager>() ?? gameObject.AddComponent<AudioManager>();
-        characterManager ??= GetComponent<CharacterManager>() ?? gameObject.AddComponent<CharacterManager>();
-        targetManager ??= GetComponent<TargetManager>() ?? gameObject.AddComponent<TargetManager>();
-        loadingManager ??= GetComponent<LoadingManager>() ?? gameObject.AddComponent<LoadingManager>();
         poolManager ??= GetComponent<PoolManager>() ?? gameObject.AddComponent<PoolManager>();
+        audioManager ??= GetComponent<AudioManager>() ?? gameObject.AddComponent<AudioManager>();
         uiManager ??= GetComponent<UIManager>() ?? gameObject.AddComponent<UIManager>();
         coinManager ??= GetComponent<CoinManager>() ?? gameObject.AddComponent<CoinManager>();
+        characterManager ??= GetComponent<CharacterManager>() ?? gameObject.AddComponent<CharacterManager>();
+        targetManager ??= GetComponent<TargetManager>() ?? gameObject.AddComponent<TargetManager>();
+        partyDataManager ??= GetComponent<PartyDataManager>() ?? gameObject.AddComponent<PartyDataManager>();
+        dungeonDataManager ??= GetComponent<DungeonDataManager>() ?? gameObject.AddComponent<DungeonDataManager>();
+        dungeonManager ??= GetComponent<DungeonManager>() ?? gameObject.AddComponent<DungeonManager>();
+        startManager ??= GetComponent<StartManager>() ?? gameObject.AddComponent<StartManager>();
+        loadingManager ??= GetComponent<LoadingManager>() ?? gameObject.AddComponent<LoadingManager>();
+        
         StartCoroutine(Flag());
     }
     private IEnumerator Flag()

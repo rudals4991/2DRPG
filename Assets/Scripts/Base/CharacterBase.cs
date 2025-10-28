@@ -75,10 +75,4 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
     { 
         Target = target;
     }
-    //private void OnDead()
-    //{
-    //    status.Kill();
-    //    Debug.Log($"{name} is Die!");
-    //    Destroy(gameObject);
-    //}
 }

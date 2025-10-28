@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour, IManagerBase
+public class UIManager : MonoBehaviour, IManagerBase
 {
-    public int Priority => 1;
+    public int Priority => 3;
 
     public void Exit()
     {
@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour, IManagerBase
 
     public IEnumerator Initialize()
     {
-        yield return null;
         DIContainer.Register(this);
+        yield return null;
     }
 }

@@ -6,7 +6,7 @@ public class CharacterManager : MonoBehaviour, IManagerBase
 {
     private readonly List<CharacterBase> characters = new();
     public IReadOnlyList<CharacterBase> AllCharacters => characters;
-    public int Priority => 2;
+    public int Priority => 5;
     CharacterSpawner spawner;
     public void Exit()
     {
@@ -14,8 +14,8 @@ public class CharacterManager : MonoBehaviour, IManagerBase
 
     public IEnumerator Initialize()
     {
-        yield return null;
         DIContainer.Register(this);
+        yield return null;
         spawner = DIContainer.Resolve<CharacterSpawner>();
         spawner.Initialize();
     }

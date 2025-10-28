@@ -16,7 +16,8 @@ public static class ManagerInitializer
     public static void ExitAll()
     {
         var managers = GameObject.FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
-            .OfType<IManagerBase>().OrderBy(m => m.Priority).ToList();
+        .OfType<IManagerBase>().OrderByDescending(m => m.Priority).ToList();
+
         foreach (var manager in managers)
         {
             manager.Exit();

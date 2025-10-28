@@ -4,7 +4,7 @@ using UnityEngine;
 public class TargetManager : MonoBehaviour, IManagerBase
 {
     CharacterManager characterManager;
-    public int Priority => 3;
+    public int Priority => 6;
     private float updateInterval = 0.25f;
     private float timer;
     public void Exit()
@@ -13,8 +13,8 @@ public class TargetManager : MonoBehaviour, IManagerBase
 
     public IEnumerator Initialize()
     {
-        yield return null;
         DIContainer.Register(this);
+        yield return null;
         characterManager = DIContainer.Resolve<CharacterManager>();
     }
     public void Tick(float dt)
