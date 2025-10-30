@@ -18,7 +18,7 @@ public class MonsterPool : ObjectPoolBase
     int myPoolSize = 30;
     protected override void Awake()
     {
-        base.Awake();
+        DIContainer.Register(this as MonsterPool);
         SetPoolSize(myPoolSize);
     }
     public override void Initialize()

@@ -6,10 +6,16 @@ using UnityEngine;
 public class PoolManager : MonoBehaviour, IManagerBase
 {
     List<ObjectPoolBase> poolList = new();
-    [SerializeField] ObjectPoolBase[] allPool;
+    PlayerPool playerPool;
+    MonsterPool monsterPool;
+    ArrowPool arrowPool;
+    HpbarPool hpbarPool;
+    //[SerializeField] ObjectPoolBase[] allPool;
     public int Priority => 1;
-    public PlayerPool PlayerPool { get; private set; }
-    public MonsterPool MonsterPool { get; private set; }
+    public PlayerPool PlayerPool => playerPool;
+    public MonsterPool MonsterPool => monsterPool;
+    public ArrowPool ArrowPool => arrowPool;
+    public HpbarPool HpbarPool => hpbarPool;
 
     public void Exit()
     {
@@ -20,13 +26,29 @@ public class PoolManager : MonoBehaviour, IManagerBase
     {
         DIContainer.Register(this);
         yield return null;
-        foreach (ObjectPoolBase pool in allPool)
-        {
-            pool.Initialize();
-            poolList.Add(pool);
-        }
-        PlayerPool = poolList.OfType<PlayerPool>().FirstOrDefault();
-        MonsterPool = poolList.OfType<MonsterPool>().FirstOrDefault();
+        ConnectPool();
+    }
+    public void ConnectPool()
+    {
+        playerPool = DIContainer.Resolve<PlayerPool>();
+        poolList.Add(playerPool);
+        if (playerPool is null) Debug.Log("PlayerPool");
+        playerPool.Initialize();
+
+        monsterPool = DIContainer.Resolve<MonsterPool>();
+        poolList.Add(monsterPool);
+        if (playerPool is null) Debug.Log("MonsterPool");
+        monsterPool.Initialize();
+
+        arrowPool = DIContainer.Resolve<ArrowPool>();
+        poolList.Add(arrowPool);
+        if (playerPool is null) Debug.Log("ArrowPool");
+        arrowPool.Initialize();
+
+        hpbarPool = DIContainer.Resolve<HpbarPool>();
+        poolList.Add(hpbarPool);
+        if (playerPool is null) Debug.Log("HpbarPool");
+        hpbarPool.Initialize();
     }
     public GameObject SpawnPlayer(CharacterType type, Vector3 pos, Quaternion rot)
     {
@@ -41,7 +63,7 @@ public class PoolManager : MonoBehaviour, IManagerBase
     }
     public void ReleaseAll()
     {
-        foreach (ObjectPoolBase pool in allPool)
+        foreach (ObjectPoolBase pool in poolList)
         {
             pool.ReleaseAll();
         }

@@ -8,7 +8,7 @@ public class HpbarPool : ObjectPoolBase
 
     protected override void Awake()
     {
-        base.Awake();
+        DIContainer.Register(this as HpbarPool);
         SetPoolSize(myPoolSize);
     }
     public override void Initialize()

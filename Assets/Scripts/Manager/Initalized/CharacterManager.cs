@@ -31,9 +31,15 @@ public class CharacterManager : MonoBehaviour, IManagerBase
     }
     public void TickAll(float dt)
     {
-        foreach (var character in characters)
+        for (int i = characters.Count - 1; i >= 0; i--)
         {
-            if(character.Status.IsAlive) character.Tick(dt);
+            var c = characters[i];
+            if (c == null || !c.gameObject.activeInHierarchy || !c.Status.IsAlive)
+            {
+                characters.RemoveAt(i);
+                continue;
+            }
+            c.Tick(dt);
         }
     }
 }

@@ -12,12 +12,8 @@ public class PlayerStatus : CharacterStatus
     public bool CanUseSkill => IsAlive && NowMp >= SkillMp;
     public PlayerStatus(CharacterData data, int maxMp, int cost, float criticalRate, int skillMp) : base(data)
     {
-        MaxMp = maxMp;
-        NowMp = 0;
+        Reset(data, maxMp, cost, criticalRate, skillMp);
         Level = 1;
-        Cost = cost;
-        CriticalRate = criticalRate;
-        SkillMp = skillMp;
     }
     public bool TryUseSkill()
     {
@@ -34,5 +30,14 @@ public class PlayerStatus : CharacterStatus
     {
         Level++;
         //TODO: 레벨업 시 추가 능력치 상승
+    }
+    public void Reset(CharacterData data, int maxMp, int cost, float criticalRate, int skillMp)
+    {
+        base.Reset(data);
+        MaxMp = maxMp;
+        NowMp = 0;
+        Cost = cost;
+        CriticalRate = criticalRate;
+        SkillMp = skillMp;
     }
 }

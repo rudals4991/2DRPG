@@ -14,12 +14,7 @@ public class CharacterStatus
     private int nowHp;
     public CharacterStatus(CharacterData data)
     {
-        maxHp = data.MaxHp;
-        nowHp = maxHp;
-        IsAlive = true;
-        CanAttack = false;
-        IsInStage = true;
-        IsHit = false;
+        Reset(data);
     }
     public void SetInStage(bool value) => IsInStage = value;
     public void SetHit(bool value) => IsHit = value;
@@ -48,6 +43,15 @@ public class CharacterStatus
     {
         nowHp = maxHp;
         IsAlive = true;
+        IsHit = false;
+    }
+    public virtual void Reset(CharacterData data)
+    {
+        maxHp = data.MaxHp;
+        nowHp = maxHp;
+        IsAlive = true;
+        CanAttack = false;
+        IsInStage = true;
         IsHit = false;
     }
 }

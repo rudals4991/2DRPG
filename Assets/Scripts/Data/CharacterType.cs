@@ -7,5 +7,7 @@ public enum CharacterType
     AD_DPS,
     AP_DPS,
     Healer,
-    Buffer
+    Buffer,
+    Monster,
+    Boss
 }

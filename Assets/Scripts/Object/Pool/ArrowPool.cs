@@ -6,7 +6,7 @@ public class ArrowPool : ObjectPoolBase
     int myPoolSize = 30;
     protected override void Awake()
     {
-        base.Awake();
+        DIContainer.Register(this as ArrowPool);
         SetPoolSize(myPoolSize);
     }
 }

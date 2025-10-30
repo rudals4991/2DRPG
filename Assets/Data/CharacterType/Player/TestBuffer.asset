@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: TestBuffer
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
   CharacterType: 5
+  AttackType: 3
   Name: TestBuffer
-  Cost: 0
   MaxHp: 80
-  MaxMp: 200
+  NowHp: 0
   MoveSpeed: 10
   AttackSpeed: 0.8
   AttackDamage: 10
-  CriticalRate: 0.25
-  Range: 30
+  AttackRange: 5

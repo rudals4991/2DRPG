@@ -3381,7 +3381,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2760875995319460236}
-  - component: {fileID: 7609261074624306286}
+  - component: {fileID: 3915727698612067243}
   - component: {fileID: 8869366826964904971}
   - component: {fileID: 272395673873436955}
   - component: {fileID: 3899397397984348359}
@@ -3389,7 +3389,6 @@ GameObject:
   - component: {fileID: 6493406486837279743}
   - component: {fileID: 3685065357297314793}
   - component: {fileID: 4095231342315438867}
-  - component: {fileID: 4912606608507689121}
   m_Layer: 5
   m_Name: TestMonster
   m_TagString: Monster
@@ -3417,7 +3416,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -170}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7609261074624306286
+--- !u!114 &3915727698612067243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3426,16 +3425,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6117632499634966718}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8028377b79c760f4f81689b230007115, type: 3}
+  m_Script: {fileID: 11500000, guid: 55cfd8f7624d58946b44dcf7955da5e0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerBase
-  data: {fileID: 11400000, guid: b7f39762b32002e479e470c97528f521, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterBase
+  data: {fileID: 11400000, guid: 99e4c4c1357fffe44aea380c00045d54, type: 2}
   attackCoolTime: 0.5
-  maxMp: 100
-  cost: 0
-  criticalRate: 0.1
-  skillMp: 20
-  skillCoolTime: 5
+  myTypeIndex: 0
 --- !u!114 &8869366826964904971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3563,18 +3558,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.44122255}
   m_Size: {x: 0.5, y: 0.8994682}
   m_Direction: 0
---- !u!114 &4912606608507689121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6117632499634966718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6ade563ec4141542873814ec907aae7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerSkill
 --- !u!1 &6149078062314177395
 GameObject:
   m_ObjectHideFlags: 0

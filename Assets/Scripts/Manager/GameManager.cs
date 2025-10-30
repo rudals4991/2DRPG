@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -14,9 +15,11 @@ public class GameManager : MonoBehaviour
     DungeonManager dungeonManager;          //9
     StartManager startManager;              //10
     LoadingManager loadingManager;          //11
+    RangeObjectManager rangeObjectManager;  //12
     
     
     bool isInitialized = false;
+    bool isTest = false;
     public static GameManager Instance { get; private set; }
     private void Awake()
     {
@@ -41,13 +44,14 @@ public class GameManager : MonoBehaviour
         dungeonManager ??= GetComponent<DungeonManager>() ?? gameObject.AddComponent<DungeonManager>();
         startManager ??= GetComponent<StartManager>() ?? gameObject.AddComponent<StartManager>();
         loadingManager ??= GetComponent<LoadingManager>() ?? gameObject.AddComponent<LoadingManager>();
-        
+        rangeObjectManager ??= GetComponent<RangeObjectManager>() ?? gameObject.AddComponent<RangeObjectManager>();
         StartCoroutine(Flag());
     }
     private IEnumerator Flag()
     {
         yield return StartCoroutine(ManagerInitializer.InitializeAll());
         isInitialized = true;
+        StartTest();
     }
     private void ExitManagers()
     { 
@@ -59,5 +63,14 @@ public class GameManager : MonoBehaviour
         float dt = Time.deltaTime;
         targetManager.Tick(dt);
         characterManager.TickAll(dt);
+        rangeObjectManager.Tick(dt);
+
+    }
+    void StartTest()
+    {
+        if (isTest) return;
+        partyDataManager.SaveParty(new List<CharacterType> { CharacterType.AD_DPS });
+        startManager.StartDungeon();
+        isTest = true;
     }
 }

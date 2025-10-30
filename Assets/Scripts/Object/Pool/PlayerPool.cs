@@ -18,7 +18,7 @@ public class PlayerPool : ObjectPoolBase
 
     protected override void Awake()
     {
-        base.Awake();
+        DIContainer.Register(this as PlayerPool);
         SetPoolSize(myPoolSize);
     }
     public override void Initialize()

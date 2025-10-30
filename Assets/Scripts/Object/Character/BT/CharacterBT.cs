@@ -23,7 +23,7 @@ public class CharacterBT
         {
             if (character.Target == null) return false;
             float dist = Vector2.Distance(character.transform.position, character.Target.transform.position);
-            return dist <= character.Attack.attackRange;
+            return dist <= character.Data.AttackRange;
         });
 
         var canUseSkill = new ConditionNode(() =>

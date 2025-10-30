@@ -11,6 +11,7 @@ public abstract class ObjectPoolBase : MonoBehaviour
 
     protected virtual void Awake()
     {
+        Debug.Log($"[DI Register] Registered Type: {this.GetType().Name}");
         DIContainer.Register(this);
     }
     protected void SetPoolSize(int mySize)

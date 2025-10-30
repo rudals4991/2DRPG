@@ -20,6 +20,7 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
     [SerializeField] float attackCoolTime = 0.5f;
     float _attackCoolTime;
 
+    public CharacterData Data => data;
     public virtual void Initialize()                         // 초기화
     {
         Animator = GetComponentInChildren<Animator>();
@@ -60,7 +61,7 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
 
         return true;
     }
-    private void OnDamaged(int dmg)
+    protected virtual void OnDamaged(int dmg)
     {
         status.TakeDamage(dmg);
         Debug.Log($"{name}의 체력 {status.NowHp} 남음");

@@ -17,7 +17,7 @@ public class MoveNode : NodeBase
             return LogAndReturn(NodeStatus.Fail);
         }
         float dist = Vector2.Distance(character.transform.position, character.Target.transform.position);
-        if (dist <= character.Attack.attackRange)
+        if (dist <= character.Data.AttackRange)
         {
             character.Move.Stop();
             return LogAndReturn(NodeStatus.Success);

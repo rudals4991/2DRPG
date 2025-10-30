@@ -12,7 +12,7 @@ public class AttackNode : NodeBase
     {
         if (character.Target is null) return LogAndReturn(NodeStatus.Fail);
         float dist = Vector2.Distance(character.transform.position, character.Target.transform.position);
-        if(dist > character.Attack.attackRange) return LogAndReturn(NodeStatus.Fail);
+        if(dist > character.Data.AttackRange) return LogAndReturn(NodeStatus.Fail);
         if (character.Attack is null) return LogAndReturn(NodeStatus.Fail);
         character.Animator.SetTrigger("Attack");
         // TryStartAttack은 즉시 발동만 시도하므로 결과로 Success/Fail만 반환

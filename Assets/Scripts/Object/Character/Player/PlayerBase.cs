@@ -11,6 +11,8 @@ public class PlayerBase : CharacterBase
     [Header("Skill CoolTime")]
     [SerializeField] float skillCoolTime = 5f;
     float _skillCoolTime;
+
+    PoolManager pool;
     public PlayerSkill PlayerSkill { get; private set; }
     public PlayerStatus PlayerStatus => status as PlayerStatus;
     public bool IsSkillOffCooldown => _skillCoolTime <= 0f;
@@ -27,6 +29,7 @@ public class PlayerBase : CharacterBase
         base.Initialize();
         status = new PlayerStatus(data, maxMp, cost, criticalRate, skillMp);
         PlayerSkill = GetComponent<PlayerSkill>();
+        pool = DIContainer.Resolve<PoolManager>();
         _skillCoolTime = 0f;
     }
     public override void Tick(float dt)
@@ -58,5 +61,20 @@ public class PlayerBase : CharacterBase
         // 쿨다운 시작
         _skillCoolTime = skillCoolTime;
         return true;
+    }
+    protected override void OnDamaged(int dmg)
+    {
+        status.TakeDamage(dmg);
+        Debug.Log($"{name}의 체력 {status.NowHp} 남음");
+        if (status.NowHp <= 0)
+        {
+            if (pool is null) Destroy(gameObject);
+            else
+            {
+                PlayerStatus.Reset(data, maxMp, cost, criticalRate, skillMp);
+                pool.PlayerPool.Release(data.CharacterType, gameObject);
+            }
+            cm.Unregister(this);
+        } 
     }
 }
