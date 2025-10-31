@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0101a48ec1ccae841b1c3d4c47256477, type: 3}
-  m_Name: TestCC
+  m_Name: TestBuff
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
-  UserType: 0
-  SkillType: 2
-  SkillName: TestCC
-  RequireMana: 50
+  UserType: 5
+  SkillType: 4
+  SkillName: TestBuff
+  RequireMana: 60
   Damage: 10

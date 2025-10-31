@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0101a48ec1ccae841b1c3d4c47256477, type: 3}
-  m_Name: TestCC
+  m_Name: TestMelee_Warrior
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
-  UserType: 0
-  SkillType: 2
-  SkillName: TestCC
+  UserType: 1
+  SkillType: 0
+  SkillName: TestMelee_Warrior
   RequireMana: 50
-  Damage: 10
+  Damage: 30

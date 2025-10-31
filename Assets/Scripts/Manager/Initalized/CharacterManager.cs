@@ -28,6 +28,13 @@ public class CharacterManager : MonoBehaviour, IManagerBase
     public void Unregister(CharacterBase c)
     {
         characters.Remove(c);
+        foreach (var other in characters)
+        {
+            if (other.Target == c)
+            {
+                other.SetTarget(null);
+            }
+        }
     }
     public void TickAll(float dt)
     {

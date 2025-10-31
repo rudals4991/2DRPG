@@ -25,6 +25,7 @@ public class PlayerStatus : CharacterStatus
     {
         if (!IsAlive) return;
         NowMp = Math.Min(MaxMp, NowMp + amount);
+        Debug.Log($"My Mana is {NowMp}");
     }
     public void LevelUp()
     {

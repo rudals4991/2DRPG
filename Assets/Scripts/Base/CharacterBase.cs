@@ -15,10 +15,8 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
     protected CharacterBT characterBT;
     protected CharacterManager cm;
     public CharacterStatus Status => status;
-
-    [Header("Attack CoolTime")]
-    [SerializeField] float attackCoolTime = 0.5f;
-    float _attackCoolTime;
+    float attackCoolTime;
+    float attackInterval;
 
     public CharacterData Data => data;
     public virtual void Initialize()                         // 초기화
@@ -31,8 +29,8 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
         IDLE = GetComponent<CharacterIDLE>();
         status = new CharacterStatus(data);
         characterBT = new CharacterBT(this);
-        _attackCoolTime = 0f;
-        //TODO: 데미지 이벤트 연동
+        attackInterval = data.AttackSpeed <= 0 ? 1f : 1f / data.AttackSpeed;
+        attackCoolTime = 0f;
         Damaged.OnDamaged -= OnDamaged;
         Damaged.OnDamaged += OnDamaged;
         cm = DIContainer.Resolve<CharacterManager>();
@@ -40,8 +38,8 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
     }
     public virtual void Tick(float dt)
     {
-        if (_attackCoolTime > 0f) _attackCoolTime -= dt;
-        status.SetCanAttack(_attackCoolTime <= 0);
+        if (attackCoolTime > 0f) attackCoolTime -= dt;
+        status.SetCanAttack(attackCoolTime <= 0);
         //TODO: 피격 무적 연동
         Damaged?.Tick(dt);
         if (status.IsHit && (Damaged?.IsInvincibleOver() ?? true)) status.SetHit(false);
@@ -51,7 +49,7 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
     {
         if (!status.IsAlive || !status.CanAttack) return false;
         if (Attack is null) return false; //TODO: 실제 공격 로직 추가
-        _attackCoolTime = attackCoolTime;
+        attackCoolTime = attackInterval;
         status.SetCanAttack(false);
         Attack.Attack();
         if (this is PlayerBase player)

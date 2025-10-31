@@ -36,8 +36,6 @@ public class CharacterAttack : MonoBehaviour
         {
             range.Initialize(character, character.Target, dir, character.Data.AttackDamage);
         }
-        
-        
     }
     public void ControlRangeAttack(RangeAttack range)
     {

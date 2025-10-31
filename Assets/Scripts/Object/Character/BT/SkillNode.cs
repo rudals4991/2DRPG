@@ -12,6 +12,7 @@ public class SkillNode : NodeBase
     {
         var player = c as PlayerBase;
         if (player is null) return LogAndReturn(NodeStatus.Fail);
+        if (player.Target == null || !player.Target.Status.IsAlive) return LogAndReturn(NodeStatus.Fail);
         bool result = player.TryCastSkill();
         return LogAndReturn(result ? NodeStatus.Success : NodeStatus.Fail);
     }

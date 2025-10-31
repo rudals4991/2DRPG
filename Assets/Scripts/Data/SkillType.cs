@@ -1,7 +1,8 @@
 using UnityEngine;
 public enum SkillType
 { 
-    Attack,
+    AttackMelee,
+    AttackRange,
     CC,
     Heal,
     Buff

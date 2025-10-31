@@ -6,7 +6,7 @@ public class PlayerBase : CharacterBase
     [SerializeField] int maxMp = 100;
     [SerializeField] int cost = 0;
     [SerializeField, Range(0f, 1f)] float criticalRate = 0.1f;
-    [SerializeField] int skillMp = 20;
+    [SerializeField] int skillMp = 0;
 
     [Header("Skill CoolTime")]
     [SerializeField] float skillCoolTime = 5f;
@@ -68,6 +68,14 @@ public class PlayerBase : CharacterBase
         Debug.Log($"{name}의 체력 {status.NowHp} 남음");
         if (status.NowHp <= 0)
         {
+            var cm = DIContainer.Resolve<CharacterManager>();
+            foreach (var c in cm.AllCharacters)
+            {
+                if (c.Target == this) c.SetTarget(null);
+            }
+
+            if (TryGetComponent(out Collider2D col)) col.enabled = false;
+
             if (pool is null) Destroy(gameObject);
             else
             {
