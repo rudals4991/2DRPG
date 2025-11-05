@@ -10,7 +10,6 @@ public class PoolManager : MonoBehaviour, IManagerBase
     MonsterPool monsterPool;
     ArrowPool arrowPool;
     HpbarPool hpbarPool;
-    //[SerializeField] ObjectPoolBase[] allPool;
     public int Priority => 1;
     public PlayerPool PlayerPool => playerPool;
     public MonsterPool MonsterPool => monsterPool;
@@ -31,23 +30,18 @@ public class PoolManager : MonoBehaviour, IManagerBase
     public void ConnectPool()
     {
         playerPool = DIContainer.Resolve<PlayerPool>();
-        poolList.Add(playerPool);
-        if (playerPool is null) Debug.Log("PlayerPool");
-        playerPool.Initialize();
-
         monsterPool = DIContainer.Resolve<MonsterPool>();
-        poolList.Add(monsterPool);
-        if (playerPool is null) Debug.Log("MonsterPool");
-        monsterPool.Initialize();
-
         arrowPool = DIContainer.Resolve<ArrowPool>();
-        poolList.Add(arrowPool);
-        if (playerPool is null) Debug.Log("ArrowPool");
-        arrowPool.Initialize();
-
         hpbarPool = DIContainer.Resolve<HpbarPool>();
+
+        poolList.Add(playerPool);
+        poolList.Add(monsterPool);
+        poolList.Add(arrowPool);
         poolList.Add(hpbarPool);
-        if (playerPool is null) Debug.Log("HpbarPool");
+
+        playerPool.Initialize();
+        monsterPool.Initialize();
+        arrowPool.Initialize();
         hpbarPool.Initialize();
     }
     public GameObject SpawnPlayer(CharacterType type, Vector3 pos, Quaternion rot)

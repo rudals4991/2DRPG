@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,9 @@ public class GameManager : MonoBehaviour
     
     
     bool isInitialized = false;
-    bool isTest = false;
+    public bool IsInitialized => isInitialized;
+
+    public static event Action Initialized;
     public static GameManager Instance { get; private set; }
     private void Awake()
     {
@@ -51,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         yield return StartCoroutine(ManagerInitializer.InitializeAll());
         isInitialized = true;
-        StartTest();
+        Initialized?.Invoke();
     }
     private void ExitManagers()
     { 
@@ -66,11 +69,9 @@ public class GameManager : MonoBehaviour
         rangeObjectManager.Tick(dt);
 
     }
-    void StartTest()
+    public static IEnumerator WaitUntilInitialized()
     {
-        if (isTest) return;
-        partyDataManager.SaveParty(new List<CharacterType> { CharacterType.AD_DPS });
-        startManager.StartDungeon();
-        isTest = true;
+        while (Instance == null || !Instance.IsInitialized)
+            yield return null;
     }
 }

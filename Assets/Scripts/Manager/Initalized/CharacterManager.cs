@@ -7,7 +7,6 @@ public class CharacterManager : MonoBehaviour, IManagerBase
     private readonly List<CharacterBase> characters = new();
     public IReadOnlyList<CharacterBase> AllCharacters => characters;
     public int Priority => 5;
-    CharacterSpawner spawner;
     public void Exit()
     {
     }
@@ -16,8 +15,6 @@ public class CharacterManager : MonoBehaviour, IManagerBase
     {
         DIContainer.Register(this);
         yield return null;
-        spawner = DIContainer.Resolve<CharacterSpawner>();
-        spawner.Initialize();
     }
     public void Register(CharacterBase c)
     {

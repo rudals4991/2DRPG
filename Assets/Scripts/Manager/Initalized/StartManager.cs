@@ -5,7 +5,7 @@ using UnityEngine;
 public class StartManager : MonoBehaviour, IManagerBase
 {
     PartyDataManager partyDataManager;
-    CharacterSpawner spawner;
+    DungeonManager dungeonManager;
     public int Priority => 10;
 
     public void Exit()
@@ -17,13 +17,11 @@ public class StartManager : MonoBehaviour, IManagerBase
         DIContainer.Register(this);
         yield return null;
         partyDataManager = DIContainer.Resolve<PartyDataManager>();
-        spawner = DIContainer.Resolve<CharacterSpawner>();
+        dungeonManager = DIContainer.Resolve<DungeonManager>();
     }
     public void StartDungeon()
     {
         if (!partyDataManager.HasPartyData()) return;
-        List<CharacterType> party = partyDataManager.GetSavedParty();
-        spawner.SpawnParty(party);
-        spawner.SpawnMonsters();
+        dungeonManager.EnterDungeon(0); //TODO: 던전 추가 후 보내는 시스템 구축
     }
 }

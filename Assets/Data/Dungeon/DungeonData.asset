@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e72488ff5ffac4f9c5087627476202, type: 3}
   m_Name: DungeonData
   m_EditorClassIdentifier: Assembly-CSharp::DungeonData
-  dungeonId: 1
+  dungeonId: 0
   dungeonName: TestDungeon
   monsterList:
   - monsterTypeIndex: 0
-    count: 1
+    count: 3
