@@ -3531,7 +3531,7 @@ GameObject:
   - component: {fileID: -2654566618925081336}
   - component: {fileID: 4710033929819378276}
   - component: {fileID: -5507972502468702870}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Player_BufferA
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -3609,9 +3609,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBase
   data: {fileID: 11400000, guid: adb5becbf880f3242bcd03e2b68bae04, type: 2}
   maxMp: 100
-  cost: 0
   criticalRate: 0.1
-  skillMp: 0
+  skillMp: 50
   skillCoolTime: 5
 --- !u!114 &9207676567032625769
 MonoBehaviour:

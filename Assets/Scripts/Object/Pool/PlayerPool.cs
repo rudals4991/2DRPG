@@ -7,13 +7,13 @@ public class PlayerPool : ObjectPoolBase
     [System.Serializable]
     public class PlayerType
     {
-        public CharacterType characterType;
+        public CharacterData data;
         public GameObject prefab;
     }
 
     [SerializeField] List<PlayerType> playerTypes = new();
-    readonly Dictionary<CharacterType, Queue<GameObject>> poolDic = new();
-    readonly List<(CharacterType type, GameObject obj)> activeObjDic = new();
+    readonly Dictionary<string, Queue<GameObject>> poolDic = new(); // key = CharacterData.Name
+    readonly List<(string name, GameObject obj)> activeObjDic = new();
     int myPoolSize = 3;
 
     protected override void Awake()
@@ -32,27 +32,27 @@ public class PlayerPool : ObjectPoolBase
                 obj.SetActive(false);
                 queue.Enqueue(obj);
             }
-            poolDic[type.characterType] = queue;
+            poolDic[type.data.Name] = queue;
         }
     }
 
-    public GameObject Get(CharacterType type, Vector3 pos, Quaternion rot)
+    public GameObject Get(CharacterData data, Vector3 pos, Quaternion rot)
     {
-        if (!poolDic.ContainsKey(type)) return null;
+        if (!poolDic.ContainsKey(data.Name)) return null;
 
         // 이미 해당 타입이 활성화되어 있으면 중복 소환 방지
-        if (activeObjDic.Any(x => x.type == type))
+        if (activeObjDic.Any(x => x.name == data.Name))
         {
-            Debug.Log($"[PlayerPool] {type} 타입은 이미 활성화 상태입니다.");
+            Debug.Log($"[PlayerPool] {data.Name}은 이미 활성화 상태입니다.");
             return null;
         }
 
-        var queue = poolDic[type];
-        GameObject obj = queue.Count > 0 ? queue.Dequeue() : Instantiate(GetPrefab(type), transform);
+        var queue = poolDic[data.Name];
+        GameObject obj = queue.Count > 0 ? queue.Dequeue() : Instantiate(GetPrefab(data.Name), transform);
 
         obj.transform.SetPositionAndRotation(pos, rot);
         obj.SetActive(true);
-        activeObjDic.Add((type, obj));
+        activeObjDic.Add((data.Name, obj));
 
         if (obj.TryGetComponent(out PlayerBase player))
         {
@@ -61,27 +61,34 @@ public class PlayerPool : ObjectPoolBase
 
         return obj;
     }
-    private GameObject GetPrefab(CharacterType type)
+    private GameObject GetPrefab(string name)
     {
         foreach (var p in playerTypes)
         {
-            if (p.characterType == type) return p.prefab;
+            if (p.data != null && p.data.Name == name) return p.prefab;
         }
         return null;
     }
-    public void Release(CharacterType type, GameObject obj)
+    public void Release(string name, GameObject obj)
     {
         obj.SetActive(false);
         activeObjDic.RemoveAll(x => x.obj == obj);
 
-        if (poolDic.ContainsKey(type)) poolDic[type].Enqueue(obj);
-        else Destroy(obj);
+        if (poolDic.ContainsKey(name))
+            poolDic[name].Enqueue(obj);
+        else
+            Destroy(obj);
+    }
+    public void Release(CharacterData data, GameObject obj)
+    {
+        if (data == null) return;
+        Release(data.Name, obj);
     }
     public override void ReleaseAll()
     {
-        foreach (var (type, obj) in activeObjDic.ToList())
+        foreach (var (name, obj) in activeObjDic.ToList())
         {
-            Release(type, obj);
+            Release(name, obj);
         }
         activeObjDic.Clear();
     }

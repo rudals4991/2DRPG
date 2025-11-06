@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 006e83a7b8dd0834db2b53fc88bb6c57, type: 3}
-  m_Name: TestAD_Melee
+  m_Name: WarriorB
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  CharacterType: 2
+  CharacterType: 1
   AttackType: 0
-  Name: TestAD_Melee
-  MaxHp: 100
+  Name: WarriorB
+  MaxHp: 150
   NowHp: 0
   MoveSpeed: 10
-  AttackSpeed: 1.5
-  AttackDamage: 20
+  AttackSpeed: 0.9
+  AttackDamage: 15
   AttackRange: 2
+  Cost: 50

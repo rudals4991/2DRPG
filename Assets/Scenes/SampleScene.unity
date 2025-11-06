@@ -435,43 +435,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PartySelectUI
   characterButtons:
   - button: {fileID: 1669246843}
-    type: 6
+    data: {fileID: 11400000, guid: adb5becbf880f3242bcd03e2b68bae04, type: 2}
   - button: {fileID: 424203335}
-    type: 6
+    data: {fileID: 11400000, guid: d80ce53a9802c1e44a9e680edfe36bbb, type: 2}
   - button: {fileID: 690307522}
-    type: 5
+    data: {fileID: 11400000, guid: d1ad70e9705f86349ad65d00992b65bf, type: 2}
   - button: {fileID: 1781315278}
-    type: 5
+    data: {fileID: 11400000, guid: b34d2ea382705b549bb1976dfe23adb5, type: 2}
   - button: {fileID: 1161750708}
-    type: 4
+    data: {fileID: 11400000, guid: ba44ed15e0f025f4da3fac142680c9d8, type: 2}
   - button: {fileID: 1271596949}
-    type: 4
+    data: {fileID: 11400000, guid: ee60eb0626b0d15449a1d9b9f00580f3, type: 2}
   - button: {fileID: 1526798364}
-    type: 4
+    data: {fileID: 11400000, guid: f79c859ad8719504ba443670bef30bec, type: 2}
   - button: {fileID: 1557607781}
-    type: 2
+    data: {fileID: 11400000, guid: b7f39762b32002e479e470c97528f521, type: 2}
   - button: {fileID: 2012004263}
-    type: 2
+    data: {fileID: 11400000, guid: b9ae4a6c8f4f3d74391c535f795210b8, type: 2}
   - button: {fileID: 1254771322}
-    type: 2
+    data: {fileID: 11400000, guid: f9ccea2aad24cab4f93757c2b052f1bc, type: 2}
   - button: {fileID: 1222240197}
-    type: 3
+    data: {fileID: 11400000, guid: 39cd932b177226949a913eb8d89dd561, type: 2}
   - button: {fileID: 626273472}
-    type: 3
+    data: {fileID: 11400000, guid: f4229b750fcabb643b9847c44405d59b, type: 2}
   - button: {fileID: 2119759413}
-    type: 3
+    data: {fileID: 11400000, guid: 5dca9ecd450a5bb46abf53dc8483330a, type: 2}
   - button: {fileID: 385167266}
-    type: 0
+    data: {fileID: 11400000, guid: 7778774081deca64cb05b43e6df25729, type: 2}
   - button: {fileID: 652732957}
-    type: 0
+    data: {fileID: 11400000, guid: b526b07f13cf2f14abb2fa95b41f712b, type: 2}
   - button: {fileID: 938662297}
-    type: 0
+    data: {fileID: 11400000, guid: 4edd567ba13364a4783366e18b41be57, type: 2}
   - button: {fileID: 1311038342}
-    type: 1
+    data: {fileID: 11400000, guid: 4522a5094501e5040a865a71a31c2554, type: 2}
   - button: {fileID: 1046011183}
-    type: 1
+    data: {fileID: 11400000, guid: 796ba4513b16e064888d0aea7338ce19, type: 2}
   - button: {fileID: 409285148}
-    type: 1
+    data: {fileID: 11400000, guid: 782c81dc8982df3428d2cf232159e0f9, type: 2}
 --- !u!1 &209176571
 GameObject:
   m_ObjectHideFlags: 0
@@ -5470,43 +5470,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPool
   objectPrefab: {fileID: 0}
   playerTypes:
-  - characterType: 0
-    prefab: {fileID: 1399190295923610073, guid: f22601d1ed7bfa9489b0c69d9f3887c6, type: 3}
-  - characterType: 0
+  - data: {fileID: 11400000, guid: 7778774081deca64cb05b43e6df25729, type: 2}
     prefab: {fileID: 7066880640872885251, guid: 6eacf3f11c0b78a49aeffecfba27cf66, type: 3}
-  - characterType: 0
+  - data: {fileID: 11400000, guid: b526b07f13cf2f14abb2fa95b41f712b, type: 2}
     prefab: {fileID: 3346864302677873347, guid: d00513b1aa914184fa74a76c2fdfb150, type: 3}
-  - characterType: 1
-    prefab: {fileID: 6373912634921493795, guid: 35436011a3c38bd4185211055d7b7416, type: 3}
-  - characterType: 1
+  - data: {fileID: 11400000, guid: 4edd567ba13364a4783366e18b41be57, type: 2}
+    prefab: {fileID: 1399190295923610073, guid: f22601d1ed7bfa9489b0c69d9f3887c6, type: 3}
+  - data: {fileID: 11400000, guid: 4522a5094501e5040a865a71a31c2554, type: 2}
     prefab: {fileID: 3269972786848148896, guid: d5f8a547d1082144096aa087d4f8c95d, type: 3}
-  - characterType: 1
+  - data: {fileID: 11400000, guid: 796ba4513b16e064888d0aea7338ce19, type: 2}
     prefab: {fileID: 2121460333371105859, guid: f0f1215d463a6d9499e3757d3b05875d, type: 3}
-  - characterType: 2
+  - data: {fileID: 11400000, guid: 782c81dc8982df3428d2cf232159e0f9, type: 2}
+    prefab: {fileID: 6373912634921493795, guid: 35436011a3c38bd4185211055d7b7416, type: 3}
+  - data: {fileID: 11400000, guid: b7f39762b32002e479e470c97528f521, type: 2}
     prefab: {fileID: 4457438058393861598, guid: d35558cf577e9334092646b4aafb8339, type: 3}
-  - characterType: 2
+  - data: {fileID: 11400000, guid: b9ae4a6c8f4f3d74391c535f795210b8, type: 2}
     prefab: {fileID: 9147318844442266652, guid: 892c445ad2d7a674481a89f9375cf8af, type: 3}
-  - characterType: 2
+  - data: {fileID: 11400000, guid: f9ccea2aad24cab4f93757c2b052f1bc, type: 2}
     prefab: {fileID: 4978961220254164427, guid: 61c28ad8611eee14cb0927fbe3e1a1bc, type: 3}
-  - characterType: 3
+  - data: {fileID: 11400000, guid: 39cd932b177226949a913eb8d89dd561, type: 2}
     prefab: {fileID: 5058242544344083416, guid: c5bacf9fd03787541b85c0afeecef62b, type: 3}
-  - characterType: 3
+  - data: {fileID: 11400000, guid: f4229b750fcabb643b9847c44405d59b, type: 2}
     prefab: {fileID: 4648261060181732, guid: b61356998d577f448a2189e50d56b5a3, type: 3}
-  - characterType: 3
+  - data: {fileID: 11400000, guid: 5dca9ecd450a5bb46abf53dc8483330a, type: 2}
     prefab: {fileID: 4778400314726119343, guid: c85755802ddb68f47a8685c4398b28fe, type: 3}
-  - characterType: 4
-    prefab: {fileID: 8290321319776256091, guid: 8069fb7367f353c4e9496cf4545dbfc2, type: 3}
-  - characterType: 4
-    prefab: {fileID: 9019293688810645749, guid: 067acea3b411aa14eba46b4a6ac263c4, type: 3}
-  - characterType: 4
+  - data: {fileID: 11400000, guid: ba44ed15e0f025f4da3fac142680c9d8, type: 2}
     prefab: {fileID: 3164593677668454953, guid: 70830473efd077d44a160941c92c2a5b, type: 3}
-  - characterType: 5
-    prefab: {fileID: 7292261430451375231, guid: 8db3a96c52afed7449eb8e14314be3b3, type: 3}
-  - characterType: 5
+  - data: {fileID: 11400000, guid: ee60eb0626b0d15449a1d9b9f00580f3, type: 2}
+    prefab: {fileID: 9019293688810645749, guid: 067acea3b411aa14eba46b4a6ac263c4, type: 3}
+  - data: {fileID: 11400000, guid: f79c859ad8719504ba443670bef30bec, type: 2}
+    prefab: {fileID: 8290321319776256091, guid: 8069fb7367f353c4e9496cf4545dbfc2, type: 3}
+  - data: {fileID: 11400000, guid: d1ad70e9705f86349ad65d00992b65bf, type: 2}
     prefab: {fileID: 7318147724493486852, guid: 831bdb1376f6fac40afb3d094635b37c, type: 3}
-  - characterType: 6
+  - data: {fileID: 11400000, guid: b34d2ea382705b549bb1976dfe23adb5, type: 2}
+    prefab: {fileID: 7292261430451375231, guid: 8db3a96c52afed7449eb8e14314be3b3, type: 3}
+  - data: {fileID: 11400000, guid: adb5becbf880f3242bcd03e2b68bae04, type: 2}
     prefab: {fileID: 6656485539367233638, guid: f92d06cf556458544942c136fda6b0ce, type: 3}
-  - characterType: 6
+  - data: {fileID: 11400000, guid: d80ce53a9802c1e44a9e680edfe36bbb, type: 2}
     prefab: {fileID: 4254608457128695252, guid: 2cc5988b6b7dd6f40953b7dc4f7fd7ca, type: 3}
 --- !u!1 &1526798362
 GameObject:

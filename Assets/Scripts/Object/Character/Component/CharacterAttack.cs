@@ -19,11 +19,19 @@ public class CharacterAttack : MonoBehaviour
 
     public void MeleeAttack()
     {
+        if (!character.Status.IsAlive) return;
+        bool isHit = false;
         Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, character.Data.AttackRange);
         foreach (var target in targets)
         {
+            if (isHit) break;
             if (target.gameObject == gameObject) continue;
-            if (target.TryGetComponent(out IDamagable damage)) damage.ApplyDamage(character.Data.AttackDamage);
+            if (!target.TryGetComponent(out IDamagable damage)) continue;
+            if (character is PlayerBase && target.GetComponent<PlayerBase>() != null) continue;
+            if (character is MonsterBase && target.GetComponent<MonsterBase>() != null) continue;
+
+            damage.ApplyDamage(character.Data.AttackDamage);
+            isHit = true;
         }
     }
     public void RangeAttacks()

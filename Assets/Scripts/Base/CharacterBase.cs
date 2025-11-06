@@ -36,6 +36,11 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
         cm = DIContainer.Resolve<CharacterManager>();
         cm.Register(this);
     }
+    public virtual void Initialize(CharacterData data)
+    {
+        this.data = data;
+        Initialize();       
+    }
     public virtual void Tick(float dt)
     {
         if (attackCoolTime > 0f) attackCoolTime -= dt;

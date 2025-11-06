@@ -1,10 +1,10 @@
+using System;
 using UnityEngine;
 
 public class PlayerBase : CharacterBase
 {
     [Header("Player Params")]
     [SerializeField] int maxMp = 100;
-    [SerializeField] int cost = 0;
     [SerializeField, Range(0f, 1f)] float criticalRate = 0.1f;
     [SerializeField] int skillMp = 0;
 
@@ -13,6 +13,7 @@ public class PlayerBase : CharacterBase
     float _skillCoolTime;
 
     PoolManager pool;
+    public static event Action<PlayerBase> OnPlayerDead;
     public PlayerSkill PlayerSkill { get; private set; }
     public PlayerStatus PlayerStatus => status as PlayerStatus;
     public bool IsSkillOffCooldown => _skillCoolTime <= 0f;
@@ -24,13 +25,13 @@ public class PlayerBase : CharacterBase
             return ps != null && ps.CanUseSkill && IsSkillOffCooldown;
         }
     }
-    public override void Initialize()
+    public override void Initialize(CharacterData data)
     {
-        base.Initialize();
-        status = new PlayerStatus(data, maxMp, cost, criticalRate, skillMp);
+        base.Initialize(data);
+        status = new PlayerStatus(data, maxMp, data.Cost, criticalRate, skillMp);
         PlayerSkill = GetComponent<PlayerSkill>();
         pool = DIContainer.Resolve<PoolManager>();
-        _skillCoolTime = 0f;
+        _skillCoolTime = skillCoolTime;
     }
     public override void Tick(float dt)
     {
@@ -68,6 +69,7 @@ public class PlayerBase : CharacterBase
         Debug.Log($"{name}의 체력 {status.NowHp} 남음");
         if (status.NowHp <= 0)
         {
+            OnPlayerDead?.Invoke(this);
             var cm = DIContainer.Resolve<CharacterManager>();
             foreach (var c in cm.AllCharacters)
             {
@@ -79,8 +81,8 @@ public class PlayerBase : CharacterBase
             if (pool is null) Destroy(gameObject);
             else
             {
-                PlayerStatus.Reset(data, maxMp, cost, criticalRate, skillMp);
-                pool.PlayerPool.Release(data.CharacterType, gameObject);
+                PlayerStatus.Reset(data, maxMp, data.Cost, criticalRate, skillMp);
+                pool.PlayerPool.Release(data, gameObject);
             }
             cm.Unregister(this);
         } 

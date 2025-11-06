@@ -39,9 +39,19 @@ public class RangeAttack : MonoBehaviour
         if (collision.TryGetComponent(out IDamagable target))
         {
             if ((object)target == owner) return;
+            if (CheckTeam(collision)) return;
             target.ApplyDamage(damage);
             ReleaseToPool();
         }
+    }
+    public bool CheckTeam(Collider2D col)
+    {
+        bool ownerPlayer = owner is PlayerBase;
+        bool ownerMonster = owner is MonsterBase;
+        bool hitPlayer = col.GetComponent<PlayerBase>() != null;
+        bool hitMonster = col.GetComponent<MonsterBase>() != null;
+        if((ownerPlayer && hitPlayer) || (ownerMonster && hitMonster)) return true;
+        return false;
     }
     public void ReleaseToPool()
     { 

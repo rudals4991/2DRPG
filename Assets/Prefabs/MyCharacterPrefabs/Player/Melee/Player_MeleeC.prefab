@@ -2445,7 +2445,7 @@ GameObject:
   - component: {fileID: -3380222954401338138}
   - component: {fileID: 4847135307045858501}
   - component: {fileID: -2340282486150814280}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Player_MeleeC
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2521,11 +2521,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8028377b79c760f4f81689b230007115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBase
-  data: {fileID: 11400000, guid: b7f39762b32002e479e470c97528f521, type: 2}
+  data: {fileID: 11400000, guid: f9ccea2aad24cab4f93757c2b052f1bc, type: 2}
   maxMp: 100
-  cost: 0
   criticalRate: 0.1
-  skillMp: 0
+  skillMp: 60
   skillCoolTime: 5
 --- !u!114 &-6164199837646035405
 MonoBehaviour:

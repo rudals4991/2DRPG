@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MonsterBase : CharacterBase
@@ -5,6 +6,8 @@ public class MonsterBase : CharacterBase
     [Header("몬스터 고유 인덱스")]
     [SerializeField] int myTypeIndex;
     PoolManager pool;
+
+    public static event Action<MonsterBase> OnMonsterDie;
     public override void Initialize()
     {
         base.Initialize();
@@ -16,6 +19,7 @@ public class MonsterBase : CharacterBase
         Debug.Log($"{name}의 체력 {status.NowHp} 남음");
         if (status.NowHp <= 0)
         {
+            OnMonsterDie?.Invoke(this);
             var cm = DIContainer.Resolve<CharacterManager>();
             foreach (var c in cm.AllCharacters)
             {

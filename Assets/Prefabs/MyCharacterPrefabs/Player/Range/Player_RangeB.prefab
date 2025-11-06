@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -4805390109629298872}
   - component: {fileID: -6867281120466112507}
   - component: {fileID: -6104899911789209773}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player_RangeB
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -57,11 +57,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8028377b79c760f4f81689b230007115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBase
-  data: {fileID: 11400000, guid: 39cd932b177226949a913eb8d89dd561, type: 2}
+  data: {fileID: 11400000, guid: f4229b750fcabb643b9847c44405d59b, type: 2}
   maxMp: 100
-  cost: 0
   criticalRate: 0.1
-  skillMp: 20
+  skillMp: 60
   skillCoolTime: 5
 --- !u!114 &7940568345348086703
 MonoBehaviour:

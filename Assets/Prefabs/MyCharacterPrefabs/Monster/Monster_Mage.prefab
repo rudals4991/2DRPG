@@ -1972,7 +1972,7 @@ GameObject:
   - component: {fileID: -7211234173238490406}
   - component: {fileID: -1876258479509033923}
   - component: {fileID: -9101400178942005978}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Monster_Mage
   m_TagString: Monster
   m_Icon: {fileID: 0}

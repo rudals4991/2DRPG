@@ -44,10 +44,10 @@ public class PoolManager : MonoBehaviour, IManagerBase
         arrowPool.Initialize();
         hpbarPool.Initialize();
     }
-    public GameObject SpawnPlayer(CharacterType type, Vector3 pos, Quaternion rot)
+    public GameObject SpawnPlayer(CharacterData data, Vector3 pos, Quaternion rot)
     {
         if (PlayerPool == null) return null;
-        return PlayerPool.Get(type, pos, rot);
+        return PlayerPool.Get(data, pos, rot);
     }
 
     public GameObject SpawnMonster(int typeIndex, Vector3 pos, Quaternion rot)

@@ -4949,7 +4949,7 @@ GameObject:
   - component: {fileID: 5216661578120570388}
   - component: {fileID: 802476959085174597}
   - component: {fileID: 985318380117040855}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Player_MageB
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -5025,11 +5025,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8028377b79c760f4f81689b230007115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBase
-  data: {fileID: 11400000, guid: ba44ed15e0f025f4da3fac142680c9d8, type: 2}
+  data: {fileID: 11400000, guid: ee60eb0626b0d15449a1d9b9f00580f3, type: 2}
   maxMp: 100
-  cost: 0
   criticalRate: 0.1
-  skillMp: 0
+  skillMp: 70
   skillCoolTime: 5
 --- !u!114 &568268873054273313
 MonoBehaviour:

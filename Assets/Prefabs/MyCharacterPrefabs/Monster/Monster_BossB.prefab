@@ -3413,7 +3413,7 @@ GameObject:
   - component: {fileID: -6217692341309728792}
   - component: {fileID: -637691534398116946}
   - component: {fileID: 5923000784731450256}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Monster_BossB
   m_TagString: Monster
   m_Icon: {fileID: 0}

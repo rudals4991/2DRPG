@@ -3212,7 +3212,7 @@ GameObject:
   - component: {fileID: 6369573392372661763}
   - component: {fileID: 1812899954336993371}
   - component: {fileID: 6255536815465607181}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Monster_MeleeA
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -3252,7 +3252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterBase
   data: {fileID: 11400000, guid: 99e4c4c1357fffe44aea380c00045d54, type: 2}
-  attackCoolTime: 0.5
   myTypeIndex: 0
 --- !u!114 &-8336477180167282629
 MonoBehaviour:

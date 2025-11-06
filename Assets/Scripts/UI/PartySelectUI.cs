@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,20 +11,19 @@ public class PartySelectUI : MonoBehaviour
     public struct CharacterButton
     {
         public Button button;
-        public CharacterType type;
+        public CharacterData data;
     }
     [Header("19개 버튼을 여기 배열에 등록하세요")]
     [SerializeField] private CharacterButton[] characterButtons;
 
     private PartyDataManager partyData;
-    private readonly List<CharacterType> selected = new();
+    private readonly List<CharacterData> selected = new();
 
     private IEnumerator Start()
     {
         // GameManager 초기화가 완료될 때까지 대기
         yield return GameManager.WaitUntilInitialized();
 
-        // 매니저 Resolve (모든 초기화 이후라 안전)
         partyData = DIContainer.Resolve<PartyDataManager>();
 
         // 버튼에 클릭 이벤트 등록
@@ -40,7 +40,7 @@ public class PartySelectUI : MonoBehaviour
         if (partyData.HasPartyData())
         {
             selected.Clear();
-            selected.AddRange(partyData.GetSavedParty().Take(PartyRules.MaxSize));
+            selected.AddRange(partyData.GetSavedParty());
             RefreshVisual();
         }
     }
@@ -48,26 +48,20 @@ public class PartySelectUI : MonoBehaviour
     private void OnClickCharacter(CharacterButton cb)
     {
         // 클릭 시 토글 방식
-        if (selected.Contains(cb.type))
+        if (selected.Contains(cb.data))
         {
-            selected.Remove(cb.type);
+            selected.Remove(cb.data);
         }
         else
         {
-            // 최대 인원 체크
-            if (selected.Count >= PartyRules.MaxSize)
-            {
-                ShowFeedback($"최대 {PartyRules.MaxSize}명까지 선택할 수 있습니다.");
-                return;
-            }
-
-            selected.Add(cb.type);
+            selected.Add(cb.data);
         }
 
         // 규칙 최종 검증
         if (!PartyRules.Valid(selected, out var reason))
         {
             ShowFeedback(reason);
+            selected.Remove(cb.data);   
             return;
         }
 
@@ -81,7 +75,7 @@ public class PartySelectUI : MonoBehaviour
         // 선택된 캐릭터는 버튼을 비활성화 (혹은 색상 변경)
         foreach (var cb in characterButtons)
         {
-            bool isSelected = selected.Contains(cb.type);
+            bool isSelected = selected.Contains(cb.data);
             if (cb.button)
             {
                 cb.button.interactable = !isSelected;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PartyDataManager : MonoBehaviour, IManagerBase
 {
-    List<CharacterType> savedParty = new();
+    List<CharacterData> savedParty = new();
     public int Priority => 7;
 
     public void Exit()
@@ -17,12 +17,12 @@ public class PartyDataManager : MonoBehaviour, IManagerBase
         DIContainer.Register(this);
         yield return null;
     }
-    public void SaveParty(List<CharacterType> selected)
+    public void SaveParty(List<CharacterData> selected)
     {
-        savedParty = new List<CharacterType>(selected);
+        savedParty = new List<CharacterData>(selected);
     }
 
-    public List<CharacterType> GetSavedParty() => savedParty;
+    public List<CharacterData> GetSavedParty() => savedParty;
 
     public bool HasPartyData() => savedParty != null && savedParty.Count > 0;
 }

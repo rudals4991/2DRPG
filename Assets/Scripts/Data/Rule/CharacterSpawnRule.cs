@@ -34,9 +34,18 @@ public class CharacterSpawnRule : MonoBehaviour
             _ => middle.points
         };
 
-        if (line == null || line.Length == 0)
-            return transform;
+        if (line == null || line.Length == 0) return null;
 
-        return line[Mathf.Clamp(index, 0, line.Length - 1)];
+        // 기본 포인트 선택
+        int pointIndex = Mathf.Clamp(index, 0, line.Length - 1);
+        Transform basePoint = line[pointIndex];
+
+        // 라인 내 오프셋 적용 (x축 기준 살짝 좌우로)
+        Vector3 offset = new Vector3(index * 0.5f, 0f, 0f);
+
+        // 오프셋 적용된 위치 생성용 더미
+        GameObject temp = new GameObject("TempSpawnPoint");
+        temp.transform.position = basePoint.position + offset;
+        return temp.transform;
     }
 }

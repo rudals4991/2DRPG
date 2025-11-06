@@ -10,6 +10,10 @@ public class DungeonManager : MonoBehaviour, IManagerBase
     CharacterSpawnRule characterSpawnRule;
     MonsterSpawnRule monsterSpawnRule;
     DungeonData currentDungeon;
+    CoinManager coinManager;
+
+    int aliveMonster = 0;
+    int alivePlayer = 0;
 
     public int Priority => 9;
 
@@ -25,6 +29,11 @@ public class DungeonManager : MonoBehaviour, IManagerBase
         partyDataManager = DIContainer.Resolve<PartyDataManager>();
         dungeonDataManager = DIContainer.Resolve<DungeonDataManager>();
         poolManager = DIContainer.Resolve<PoolManager>();
+
+        PlayerBase.OnPlayerDead -= PlayerDead;
+        PlayerBase.OnPlayerDead += PlayerDead;
+        MonsterBase.OnMonsterDie -= MonsterDead;
+        MonsterBase.OnMonsterDie += MonsterDead;
     }
     public void EnterDungeon(int dungeonId)
     {
@@ -38,25 +47,30 @@ public class DungeonManager : MonoBehaviour, IManagerBase
     {
         var party = partyDataManager.GetSavedParty();
         if (party == null || party.Count == 0) return;
-        var frontList = new List<CharacterType>();
-        var middleList = new List<CharacterType>();
-        var backList = new List<CharacterType>();
-        foreach (var type in party)
+        // 스폰 포인트 매니저 가져오기
+        characterSpawnRule = DIContainer.Resolve<CharacterSpawnRule>();
+        alivePlayer = 0;
+        var frontList = new List<CharacterData>();
+        var middleList = new List<CharacterData>();
+        var backList = new List<CharacterData>();
+        foreach (var data in party)
         {
-            switch (type)
+            switch (data.CharacterType)
             {
                 case CharacterType.Tanker:
                 case CharacterType.Warrior:
-                    frontList.Add(type);
+                    frontList.Add(data);
                     break;
+
                 case CharacterType.AD_DPS_Melee:
                 case CharacterType.AD_DPS_Range:
-                    middleList.Add(type);
+                    middleList.Add(data);
                     break;
+
                 case CharacterType.AP_DPS:
                 case CharacterType.Buffer:
                 case CharacterType.Healer:
-                    backList.Add(type);
+                    backList.Add(data);
                     break;
             }
         }
@@ -64,35 +78,37 @@ public class DungeonManager : MonoBehaviour, IManagerBase
         middleList.Sort(SortByPriority);
         backList.Sort(SortByPriority);
 
-        // 스폰 포인트 매니저 가져오기
-        characterSpawnRule = DIContainer.Resolve<CharacterSpawnRule>();
+
 
         // 전방 소환
         for (int i = 0; i < frontList.Count; i++)
         {
-            var type = frontList[i];
-            var point = characterSpawnRule.GetSpawnPoint(type, i);
-            poolManager.SpawnPlayer(type, point.position, Quaternion.Euler(0, 180, 0));
+            var data = frontList[i];
+            var point = characterSpawnRule.GetSpawnPoint(data.CharacterType, i);
+            poolManager.SpawnPlayer(data, point.position, Quaternion.Euler(0, 180, 0));
+            alivePlayer++;
         }
 
         // 중앙 소환
         for (int i = 0; i < middleList.Count; i++)
         {
-            var type = middleList[i];
-            var point = characterSpawnRule.GetSpawnPoint(type, i);
-            poolManager.SpawnPlayer(type, point.position, Quaternion.Euler(0, 180, 0));
+            var data = middleList[i];
+            var point = characterSpawnRule.GetSpawnPoint(data.CharacterType, i);
+            poolManager.SpawnPlayer(data, point.position, Quaternion.Euler(0, 180, 0));
+            alivePlayer++;
         }
 
         // 후방 소환
         for (int i = 0; i < backList.Count; i++)
         {
-            var type = backList[i];
-            var point = characterSpawnRule.GetSpawnPoint(type, i);
-            poolManager.SpawnPlayer(type, point.position, Quaternion.Euler(0, 180, 0));
+            var data = backList[i];
+            var point = characterSpawnRule.GetSpawnPoint(data.CharacterType, i);
+            poolManager.SpawnPlayer(data, point.position, Quaternion.Euler(0, 180, 0));
+            alivePlayer++;
         }
 
     }
-    private int SortByPriority(CharacterType a, CharacterType b)
+    private int SortByPriority(CharacterData a, CharacterData b)
     {
         int GetPriority(CharacterType t) => t switch
         {
@@ -105,13 +121,14 @@ public class DungeonManager : MonoBehaviour, IManagerBase
             CharacterType.Healer => 7,
             _ => 999
         };
-        return GetPriority(a).CompareTo(GetPriority(b));
+        return GetPriority(a.CharacterType).CompareTo(GetPriority(b.CharacterType));
     }
 
     private void SpawnMonsters()
     {
         monsterSpawnRule = DIContainer.Resolve<MonsterSpawnRule>();
         if (currentDungeon == null || currentDungeon.monsterList == null) return;
+        aliveMonster = 0;
         int frontIndex = 0, middleIndex = 0, backIndex = 0;
         foreach (var monsterInfo in currentDungeon.monsterList)
         {
@@ -129,6 +146,7 @@ public class DungeonManager : MonoBehaviour, IManagerBase
 
                 var point = monsterSpawnRule.GetSpawnPoint(lineType, pointIndex);
                 poolManager.SpawnMonster(monsterInfo.monsterTypeIndex, point.position, Quaternion.identity);
+                aliveMonster++;
             }
         }
     }
@@ -142,6 +160,32 @@ public class DungeonManager : MonoBehaviour, IManagerBase
             6 or 7 or 8 => 1,      // 중앙
             _ => 1                 // 기본값: 중앙
         };
+    }
+
+    public void MonsterDead(MonsterBase monster)
+    {
+        aliveMonster--;
+        if (aliveMonster <= 0) ClearDungeon();
+    }
+    public void PlayerDead(PlayerBase player)
+    { 
+        alivePlayer--;
+        if (alivePlayer <= 0) FailDungeon(); 
+    }
+
+    public void ClearDungeon()
+    {
+        Debug.Log("던전 클리어");
+        coinManager = DIContainer.Resolve<CoinManager>();
+        int reward = currentDungeon.rewardCoin;
+        coinManager.AddCoin(reward);
+        ExitDungeon();
+        //TODO: UI를 통한 연출 추가
+    }
+    public void FailDungeon()
+    {
+        ExitDungeon();
+        Debug.Log("던전 실패");//TODO: 던전 실패 연출 추가
     }
 
     public void ExitDungeon()

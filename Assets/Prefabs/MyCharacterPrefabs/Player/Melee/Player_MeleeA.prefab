@@ -2661,7 +2661,7 @@ GameObject:
   - component: {fileID: -4666759108654364948}
   - component: {fileID: 5596383926733428010}
   - component: {fileID: 53952868316123568}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Player_MeleeA
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2739,9 +2739,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBase
   data: {fileID: 11400000, guid: b7f39762b32002e479e470c97528f521, type: 2}
   maxMp: 100
-  cost: 0
   criticalRate: 0.1
-  skillMp: 0
+  skillMp: 60
   skillCoolTime: 5
 --- !u!114 &2479719911787114100
 MonoBehaviour:

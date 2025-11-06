@@ -33,9 +33,16 @@ public class MonsterSpawnRule : MonoBehaviour
             _ => middle.points
         };
 
-        if (line == null || line.Length == 0)
-            return transform;
+        if (line == null || line.Length == 0) return null;
 
-        return line[Mathf.Clamp(index, 0, line.Length - 1)];
+        int pointIndex = Mathf.Clamp(index, 0, line.Length - 1);
+        Transform basePoint = line[pointIndex];
+
+        // 몬스터는 반대 방향(왼쪽)으로 간격
+        Vector3 offset = new Vector3(-index * 0.5f, 0f, 0f);
+
+        GameObject temp = new GameObject("TempMonsterSpawn");
+        temp.transform.position = basePoint.position + offset;
+        return temp.transform;
     }
 }
