@@ -19,6 +19,8 @@ public class DungeonManager : MonoBehaviour, IManagerBase
 
     public void Exit()
     {
+        PlayerBase.OnPlayerDead -= PlayerDead;
+        MonsterBase.OnMonsterDie -= MonsterDead;
         ExitDungeon();
     }
 
@@ -134,7 +136,7 @@ public class DungeonManager : MonoBehaviour, IManagerBase
         {
             for (int i = 0; i < monsterInfo.count; i++)
             {
-                int lineType = GetMonsterLineType(monsterInfo.monsterTypeIndex);
+                int lineType = GetMonsterLineType(monsterInfo.monsterData.CharacterType);
                 int pointIndex = 0;
 
                 switch (lineType)
@@ -145,20 +147,20 @@ public class DungeonManager : MonoBehaviour, IManagerBase
                 }
 
                 var point = monsterSpawnRule.GetSpawnPoint(lineType, pointIndex);
-                poolManager.SpawnMonster(monsterInfo.monsterTypeIndex, point.position, Quaternion.identity);
+                poolManager.SpawnMonster(monsterInfo.monsterData, point.position, Quaternion.identity);
                 aliveMonster++;
             }
         }
     }
     // 몬스터 타입에 따라 배치 라인 결정 (임시 규칙)
-    private int GetMonsterLineType(int monsterTypeIndex)
+    private int GetMonsterLineType(CharacterType type)
     {
-        return monsterTypeIndex switch
+        return type switch
         {
-            0 or 1 or 4 or 5 => 0, // 전방
-            2 or 3 => 2,           // 후방
-            6 or 7 or 8 => 1,      // 중앙
-            _ => 1                 // 기본값: 중앙
+            CharacterType.Tanker => 0,                              // 전방
+            CharacterType.Monster_Melee => 1,                       // 중앙
+            CharacterType.Monster_Range or CharacterType.Boss => 2, // 후방
+            _ => 1                                                  // 기본값: 중앙
         };
     }
 

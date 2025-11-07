@@ -74,4 +74,8 @@ public class GameManager : MonoBehaviour
         while (Instance == null || !Instance.IsInitialized)
             yield return null;
     }
+    private void OnApplicationQuit()
+    {
+        ExitManagers();
+    }
 }

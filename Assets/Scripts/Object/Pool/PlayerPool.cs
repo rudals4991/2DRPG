@@ -56,7 +56,7 @@ public class PlayerPool : ObjectPoolBase
 
         if (obj.TryGetComponent(out PlayerBase player))
         {
-            player.Initialize();
+            player.Initialize(data);
         }
 
         return obj;

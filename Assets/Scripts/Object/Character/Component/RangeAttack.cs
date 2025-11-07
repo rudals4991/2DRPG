@@ -26,7 +26,12 @@ public class RangeAttack : MonoBehaviour
     public void Tick(float dt)
     {
         if (!IsActive) return;
-        if (target is null) return;
+        if (target is null) 
+        {
+            ReleaseToPool();
+            return; 
+        }
+        
         transform.Translate(dir * moveSpeed * dt,Space.World);
         timer -= dt;
         if (timer <= 0)
@@ -38,7 +43,6 @@ public class RangeAttack : MonoBehaviour
     {
         if (collision.TryGetComponent(out IDamagable target))
         {
-            if ((object)target == owner) return;
             if (CheckTeam(collision)) return;
             target.ApplyDamage(damage);
             ReleaseToPool();

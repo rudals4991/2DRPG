@@ -4009,8 +4009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55cfd8f7624d58946b44dcf7955da5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterBase
-  data: {fileID: 11400000, guid: 59654e4df06a38140bb615ebcf51a52c, type: 2}
-  myTypeIndex: 4
+  data: {fileID: 11400000, guid: 6ec92a3b460f5b34599392ce37512d96, type: 2}
 --- !u!114 &-2709634007453857444
 MonoBehaviour:
   m_ObjectHideFlags: 0

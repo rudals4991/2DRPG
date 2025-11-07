@@ -15,6 +15,6 @@ public class DungeonData : ScriptableObject
 [System.Serializable]
 public class MonsterSpawnInfo
 {
-    public int monsterTypeIndex;
+    public CharacterData monsterData;
     public int count;
 }

@@ -5796,24 +5796,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterPool
   objectPrefab: {fileID: 0}
   monsterTypes:
-  - typeIndex: 0
+  - data: {fileID: 11400000, guid: f08acce61e1c04d449ba59c7293442e8, type: 2}
     prefab: {fileID: 4395146214821028842, guid: d0702325cca10144aaa69bc81c725aa7, type: 3}
-  - typeIndex: 1
+  - data: {fileID: 11400000, guid: 99e4c4c1357fffe44aea380c00045d54, type: 2}
     prefab: {fileID: 2027237797495151942, guid: d9a4dcb250dc2f340836cbfbebe74d91, type: 3}
-  - typeIndex: 2
+  - data: {fileID: 11400000, guid: 46ffdd33eb20fc24b87408957b86c152, type: 2}
     prefab: {fileID: 2427229159497763060, guid: 8f33ef2d7d99b2b448a85865515ce93f, type: 3}
-  - typeIndex: 3
+  - data: {fileID: 11400000, guid: 5378ed99f2d2ddb4cb23f795a17f0b61, type: 2}
     prefab: {fileID: 3188191386511389140, guid: e6982ea9bb8fab34fb38db28eb7ceb22, type: 3}
-  - typeIndex: 4
+  - data: {fileID: 11400000, guid: 6ec92a3b460f5b34599392ce37512d96, type: 2}
     prefab: {fileID: 7598245534011420581, guid: c6cf6e7ed4dd2904e908e525545cb1dc, type: 3}
-  - typeIndex: 5
+  - data: {fileID: 11400000, guid: 59654e4df06a38140bb615ebcf51a52c, type: 2}
     prefab: {fileID: 5910706388799933685, guid: 68586d83b81746c47a1b667ea659e5ce, type: 3}
-  - typeIndex: 6
-    prefab: {fileID: 6117632499634966718, guid: 58ee03adb7b6c7f4084e611c52f0c8f2, type: 3}
-  - typeIndex: 7
-    prefab: {fileID: 5228358879230627646, guid: 476fc5852bf31c044abb3d468c4e274f, type: 3}
-  - typeIndex: 8
+  - data: {fileID: 11400000, guid: d7b5c186fbae44c478c87fb219458454, type: 2}
     prefab: {fileID: 5467788329846416677, guid: 20bee22de46d65d4497fe96259e02a99, type: 3}
+  - data: {fileID: 11400000, guid: 5e54712a077c5394690b1d7029a5ae01, type: 2}
+    prefab: {fileID: 6117632499634966718, guid: 58ee03adb7b6c7f4084e611c52f0c8f2, type: 3}
+  - data: {fileID: 11400000, guid: c6884839b036f91468b82f1c12869a80, type: 2}
+    prefab: {fileID: 5228358879230627646, guid: 476fc5852bf31c044abb3d468c4e274f, type: 3}
 --- !u!1 &1574672560
 GameObject:
   m_ObjectHideFlags: 0

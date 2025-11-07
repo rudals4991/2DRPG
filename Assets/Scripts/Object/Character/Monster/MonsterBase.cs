@@ -3,14 +3,12 @@ using UnityEngine;
 
 public class MonsterBase : CharacterBase
 {
-    [Header("몬스터 고유 인덱스")]
-    [SerializeField] int myTypeIndex;
     PoolManager pool;
 
     public static event Action<MonsterBase> OnMonsterDie;
-    public override void Initialize()
+    public override void Initialize(CharacterData data)
     {
-        base.Initialize();
+        base.Initialize(data);
         pool = DIContainer.Resolve<PoolManager>();
     }
     protected override void OnDamaged(int dmg)
@@ -32,7 +30,7 @@ public class MonsterBase : CharacterBase
             else
             {
                 status.Reset(data);
-                pool.MonsterPool.Release(myTypeIndex, gameObject);
+                pool.MonsterPool.Release(data, gameObject);
             }
             cm.Unregister(this);
         }

@@ -9,6 +9,8 @@ public enum CharacterType
     AP_DPS,
     Healer,
     Buffer,
-    Monster,
+    Monster_Tanker,
+    Monster_Melee,
+    Monster_Range,
     Boss
 }

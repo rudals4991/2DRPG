@@ -50,10 +50,10 @@ public class PoolManager : MonoBehaviour, IManagerBase
         return PlayerPool.Get(data, pos, rot);
     }
 
-    public GameObject SpawnMonster(int typeIndex, Vector3 pos, Quaternion rot)
+    public GameObject SpawnMonster(CharacterData data, Vector3 pos, Quaternion rot)
     {
         if (MonsterPool == null) return null;
-        return MonsterPool.Get(typeIndex, pos, rot);
+        return MonsterPool.Get(data, pos, rot);
     }
     public void ReleaseAll()
     {
