@@ -9,14 +9,14 @@ public class GameManager : MonoBehaviour
     AudioManager audioManager;              //2
     UIManager uiManager;                    //3
     CoinManager coinManager;                //4
-    CharacterManager characterManager;      //5
-    TargetManager targetManager;            //6
-    PartyDataManager partyDataManager;      //7
-    DungeonDataManager dungeonDataManager;  //8
-    DungeonManager dungeonManager;          //9
-    StartManager startManager;              //10
-    LoadingManager loadingManager;          //11
-    RangeObjectManager rangeObjectManager;  //12
+    CharacterManager characterManager;      //6
+    TargetManager targetManager;            //7
+    PartyDataManager partyDataManager;      //8
+    DungeonDataManager dungeonDataManager;  //9
+    DungeonManager dungeonManager;          //10
+    StartManager startManager;              //11
+    LoadingManager loadingManager;          //12
+    RangeObjectManager rangeObjectManager;  //13
     
     
     bool isInitialized = false;

@@ -15,7 +15,7 @@ public class DungeonManager : MonoBehaviour, IManagerBase
     int aliveMonster = 0;
     int alivePlayer = 0;
 
-    public int Priority => 9;
+    public int Priority => 10;
 
     public void Exit()
     {

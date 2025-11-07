@@ -6,7 +6,7 @@ public class RangeObjectManager : MonoBehaviour, IManagerBase
 {
     PoolManager poolManager;
     readonly List<RangeAttack> rangeList = new();
-    public int Priority => 12;
+    public int Priority => 13;
 
     public void Exit()
     {

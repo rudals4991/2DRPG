@@ -5,7 +5,7 @@ using UnityEngine;
 public class PartyDataManager : MonoBehaviour, IManagerBase
 {
     List<CharacterData> savedParty = new();
-    public int Priority => 7;
+    public int Priority => 8;
 
     public void Exit()
     {

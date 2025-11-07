@@ -6,7 +6,7 @@ public class StartManager : MonoBehaviour, IManagerBase
 {
     PartyDataManager partyDataManager;
     DungeonManager dungeonManager;
-    public int Priority => 10;
+    public int Priority => 11;
 
     public void Exit()
     {

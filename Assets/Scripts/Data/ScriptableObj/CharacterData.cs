@@ -15,5 +15,8 @@ public class CharacterData : ScriptableObject
     public float AttackSpeed;           // 공격속도
     public int AttackDamage;            // 기본 공격 데미지
     public int AttackRange;             // 공격 사거리
+
+    [Header("해금")]
     public int Cost;                    // 해금 비용
+    public bool IsUnlocked = false;     // 해금 여부
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class DungeonDataManager : MonoBehaviour,IManagerBase
 {
     [SerializeField] private List<DungeonData> dungeonDatas = new();
-    public int Priority => 8;
+    public int Priority => 9;
 
     public void Exit()
     {

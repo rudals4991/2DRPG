@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class LoadingManager : MonoBehaviour, IManagerBase
 {
-    public int Priority => 11;
+    public int Priority => 12;
 
     public void Exit()
     {

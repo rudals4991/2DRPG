@@ -4,7 +4,7 @@ using UnityEngine;
 public class TargetManager : MonoBehaviour, IManagerBase
 {
     CharacterManager characterManager;
-    public int Priority => 6;
+    public int Priority => 7;
     private float updateInterval = 0.25f;
     private float timer;
     public void Exit()
