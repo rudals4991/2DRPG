@@ -15,6 +15,7 @@ MonoBehaviour:
   CharacterType: 3
   AttackType: 1
   Name: RangeB
+  TypeIndex: 1
   MaxHp: 100
   NowHp: 0
   MoveSpeed: 10
@@ -22,3 +23,4 @@ MonoBehaviour:
   AttackDamage: 25
   AttackRange: 5
   Cost: 50
+  IsUnlocked: 0

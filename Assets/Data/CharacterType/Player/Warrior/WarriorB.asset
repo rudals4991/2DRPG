@@ -15,6 +15,7 @@ MonoBehaviour:
   CharacterType: 1
   AttackType: 0
   Name: WarriorB
+  TypeIndex: 1
   MaxHp: 150
   NowHp: 0
   MoveSpeed: 10
@@ -22,3 +23,4 @@ MonoBehaviour:
   AttackDamage: 15
   AttackRange: 2
   Cost: 50
+  IsUnlocked: 0

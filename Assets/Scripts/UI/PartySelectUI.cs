@@ -45,15 +45,14 @@ public class PartySelectUI : MonoBehaviour
 
     private void OnClickCharacter(CharacterButton cb)
     {
+        if (!cb.data.IsUnlocked)
+        {
+            Debug.Log("해금되지 않은 캐릭터입니다.");
+            return;
+        }
         // 클릭 시 토글 방식
-        if (selected.Contains(cb.data))
-        {
-            selected.Remove(cb.data);
-        }
-        else
-        {
-            selected.Add(cb.data);
-        }
+        if (selected.Contains(cb.data)) selected.Remove(cb.data);
+        else selected.Add(cb.data);
 
         // 규칙 최종 검증
         if (!PartyRules.Valid(selected, out var reason))

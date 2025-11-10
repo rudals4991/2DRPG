@@ -15,6 +15,7 @@ MonoBehaviour:
   CharacterType: 4
   AttackType: 1
   Name: MageB
+  TypeIndex: 1
   MaxHp: 80
   NowHp: 0
   MoveSpeed: 10
@@ -22,3 +23,4 @@ MonoBehaviour:
   AttackDamage: 30
   AttackRange: 7
   Cost: 50
+  IsUnlocked: 0

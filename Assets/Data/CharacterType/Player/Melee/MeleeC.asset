@@ -15,6 +15,7 @@ MonoBehaviour:
   CharacterType: 2
   AttackType: 0
   Name: MeleeC
+  TypeIndex: 2
   MaxHp: 150
   NowHp: 0
   MoveSpeed: 10
@@ -22,3 +23,4 @@ MonoBehaviour:
   AttackDamage: 20
   AttackRange: 2
   Cost: 200
+  IsUnlocked: 0

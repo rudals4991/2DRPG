@@ -15,6 +15,7 @@ MonoBehaviour:
   CharacterType: 5
   AttackType: 2
   Name: HealerB
+  TypeIndex: 1
   MaxHp: 80
   NowHp: 0
   MoveSpeed: 10
@@ -22,3 +23,4 @@ MonoBehaviour:
   AttackDamage: 20
   AttackRange: 7
   Cost: 200
+  IsUnlocked: 0

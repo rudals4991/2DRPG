@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
 using UnityEngine;
 
 public class CharacterManager : MonoBehaviour, IManagerBase
@@ -55,6 +53,12 @@ public class CharacterManager : MonoBehaviour, IManagerBase
         if (data == null) return false;
         if (data.IsUnlocked) return true;
 
+        if (!CanUnlock(data))
+        {
+            Debug.Log($"[CharacterManager] 이전 캐릭터를 먼저 해금해야 합니다. ({data.CharacterType})");
+            return false;
+        }
+
         if (!coinManager.HasCoin(data.Cost))
         {
             Debug.Log($"[CharacterManager] 코인 부족. 필요: {data.Cost}");
@@ -68,6 +72,17 @@ public class CharacterManager : MonoBehaviour, IManagerBase
         SaveUnlockState(data);
         Debug.Log($"[CharacterManager] {data.Name} 해금 완료!");
         return true;
+    }
+
+    private bool CanUnlock(CharacterData data)
+    {
+        // 같은 역할(CharacterType) 내에서 이전 캐릭터가 존재해야 함
+        var prev = allCharacterData.Find(x =>
+            x.CharacterType == data.CharacterType && x.TypeIndex == data.TypeIndex - 1);
+
+        if (prev == null) return true;
+
+        return prev.IsUnlocked; // 이전 캐릭터가 해금돼 있어야 가능
     }
 
     private void SaveUnlockState(CharacterData data)

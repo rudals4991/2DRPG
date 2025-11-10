@@ -15,6 +15,7 @@ MonoBehaviour:
   CharacterType: 0
   AttackType: 0
   Name: TankerB
+  TypeIndex: 1
   MaxHp: 200
   NowHp: 0
   MoveSpeed: 10
@@ -22,3 +23,4 @@ MonoBehaviour:
   AttackDamage: 10
   AttackRange: 2
   Cost: 50
+  IsUnlocked: 0

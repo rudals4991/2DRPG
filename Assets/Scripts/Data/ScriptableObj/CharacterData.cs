@@ -7,6 +7,7 @@ public class CharacterData : ScriptableObject
     public CharacterType CharacterType; // 역할
     public AttackType AttackType;       // 공격방식
     public string Name;                 // 이름
+    public int TypeIndex;               // 역할 내 순서
 
     [Header("스탯")]
     public int MaxHp;                   // 최대체력

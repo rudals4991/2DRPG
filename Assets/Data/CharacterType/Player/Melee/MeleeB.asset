@@ -15,6 +15,7 @@ MonoBehaviour:
   CharacterType: 2
   AttackType: 0
   Name: MeleeB
+  TypeIndex: 1
   MaxHp: 100
   NowHp: 0
   MoveSpeed: 10
@@ -22,3 +23,4 @@ MonoBehaviour:
   AttackDamage: 20
   AttackRange: 2
   Cost: 50
+  IsUnlocked: 0

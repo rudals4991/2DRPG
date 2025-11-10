@@ -31,6 +31,7 @@ public class PlayerStatus : CharacterStatus
     {
         Level++;
         //TODO: 레벨업 시 추가 능력치 상승
+        Debug.Log("레벨업!");
     }
     public void Reset(CharacterData data, int maxMp, int cost, float criticalRate, int skillMp)
     {

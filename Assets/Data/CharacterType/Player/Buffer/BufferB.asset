@@ -15,6 +15,7 @@ MonoBehaviour:
   CharacterType: 6
   AttackType: 3
   Name: BufferB
+  TypeIndex: 1
   MaxHp: 90
   NowHp: 0
   MoveSpeed: 7
@@ -22,3 +23,4 @@ MonoBehaviour:
   AttackDamage: 20
   AttackRange: 5
   Cost: 50
+  IsUnlocked: 0

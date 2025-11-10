@@ -15,6 +15,7 @@ MonoBehaviour:
   CharacterType: 4
   AttackType: 1
   Name: MageA
+  TypeIndex: 2
   MaxHp: 100
   NowHp: 0
   MoveSpeed: 10
@@ -22,3 +23,4 @@ MonoBehaviour:
   AttackDamage: 50
   AttackRange: 7
   Cost: 200
+  IsUnlocked: 0
