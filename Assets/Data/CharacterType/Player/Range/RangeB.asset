@@ -16,6 +16,7 @@ MonoBehaviour:
   AttackType: 1
   Name: RangeB
   TypeIndex: 1
+  myImage: {fileID: 21300000, guid: 48207471f396c8d42925c9a629fa09d7, type: 3}
   MaxHp: 100
   NowHp: 0
   MoveSpeed: 10
@@ -23,4 +24,4 @@ MonoBehaviour:
   AttackDamage: 25
   AttackRange: 5
   Cost: 50
-  IsUnlocked: 0
+  IsUnlocked: 1

@@ -16,6 +16,7 @@ MonoBehaviour:
   AttackType: 2
   Name: HealerB
   TypeIndex: 1
+  myImage: {fileID: 21300000, guid: 8b2fc645e3be18e47bbd0b9c0cc50088, type: 3}
   MaxHp: 80
   NowHp: 0
   MoveSpeed: 10

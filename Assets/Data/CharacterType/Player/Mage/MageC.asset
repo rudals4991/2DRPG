@@ -16,6 +16,7 @@ MonoBehaviour:
   AttackType: 1
   Name: MageA
   TypeIndex: 2
+  myImage: {fileID: 21300000, guid: bd2976279b070364fb8cb957b5cd62cc, type: 3}
   MaxHp: 100
   NowHp: 0
   MoveSpeed: 10

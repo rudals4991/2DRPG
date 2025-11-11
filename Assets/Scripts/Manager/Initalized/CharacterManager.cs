@@ -42,9 +42,11 @@ public class CharacterManager : MonoBehaviour, IManagerBase
 
     public void TickAll(float dt)
     {
-        foreach (var c in activeCharacters)
+        for (int i = activeCharacters.Count - 1; i >= 0; i--)
         {
-            if (c != null && c.Status.IsAlive)
+            var c = activeCharacters[i];
+            if (c == null) continue;
+            if (c.Status.IsAlive)
                 c.Tick(dt);
         }
     }
@@ -91,10 +93,16 @@ public class CharacterManager : MonoBehaviour, IManagerBase
         PlayerPrefs.Save();
     }
 
-    private void LoadUnlockData()
+    public void LoadUnlockData()
     {
         foreach (var data in allCharacterData)
         {
+            if (data.Cost == 0)
+            {
+                data.IsUnlocked = true;
+                SaveUnlockState(data);
+                continue;
+            }
             data.IsUnlocked = PlayerPrefs.GetInt($"Unlock_{data.Name}", data.Cost == 0 ? 1 : 0) == 1;
         }
     }

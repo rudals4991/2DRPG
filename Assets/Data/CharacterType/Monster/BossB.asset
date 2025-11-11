@@ -15,6 +15,8 @@ MonoBehaviour:
   CharacterType: 10
   AttackType: 0
   Name: BossB
+  TypeIndex: 0
+  myImage: {fileID: 21300000, guid: 955e1b18a34fc274e8293c2f2e6f7c68, type: 3}
   MaxHp: 500
   NowHp: 0
   MoveSpeed: 6
@@ -22,3 +24,4 @@ MonoBehaviour:
   AttackDamage: 40
   AttackRange: 2
   Cost: 0
+  IsUnlocked: 0

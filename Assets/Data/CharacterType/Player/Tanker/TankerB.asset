@@ -16,6 +16,7 @@ MonoBehaviour:
   AttackType: 0
   Name: TankerB
   TypeIndex: 1
+  myImage: {fileID: 21300000, guid: cd3d9ae6bb077a04282ecf011790d17a, type: 3}
   MaxHp: 200
   NowHp: 0
   MoveSpeed: 10

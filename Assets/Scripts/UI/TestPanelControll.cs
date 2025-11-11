@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class TestPanelControll : MonoBehaviour
 {
-    [SerializeField] GameObject panel;
-    public void OffPanel()
+    [SerializeField] GameObject partyPanel;
+    [SerializeField] GameObject infoPanel;
+    public void OffPanel(GameObject panel)
     {
         panel.SetActive(false);
     }
-    public void OnPanel()
+    public void OnPanel(GameObject panel)
     {
         panel.SetActive(true);
     }

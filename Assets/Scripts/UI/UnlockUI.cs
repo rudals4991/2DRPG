@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,17 +14,40 @@ public class UnlockUI : MonoBehaviour
         public CharacterData data;
     }
     [SerializeField] CharacterButton[] characterButtons;
+    [SerializeField] GameObject infoPanel;
+    [SerializeField] Image image;
+    [SerializeField] TMP_Text nameText;
+    [SerializeField] TMP_Text type;
+    [SerializeField] TMP_Text maxHp;
+    [SerializeField] TMP_Text attackSpeed;
+    [SerializeField] TMP_Text attackDamage;
+    [SerializeField] TMP_Text attackRange;
     CharacterManager characterManager;
+    public static event Action OnUnlockUpdated;
 
     private IEnumerator Start()
     {
         yield return GameManager.WaitUntilInitialized();
         characterManager = DIContainer.Resolve<CharacterManager>();
+        characterManager.LoadUnlockData();
         foreach (var cb in characterButtons)
         {
             characterManager.RegisterCharacterData(cb.data);
-            var local = cb;
-            local.button.onClick.AddListener(() => OnClickCharacter(local));
+            var btn = cb.button;
+            var data = cb.data;
+            var overlay = cb.lockOverlay;
+            if (btn != null)
+            {
+                btn.onClick.AddListener(() =>
+                {
+                    OnClickCharacter(new CharacterButton
+                    {
+                        button = btn,
+                        data = data,
+                        lockOverlay = overlay
+                    });
+                });
+            }
         }
         RefreshVisual();
     }
@@ -40,7 +65,8 @@ public class UnlockUI : MonoBehaviour
     {
         foreach (var cb in characterButtons)
         {
-            if (cb.lockOverlay) cb.lockOverlay.gameObject.SetActive(!cb.data.IsUnlocked);
+            bool unlocked = cb.data.IsUnlocked;
+            if (cb.lockOverlay != null) cb.lockOverlay.gameObject.SetActive(!unlocked);
         }
     }
     private void ShowUnlock(CharacterButton cb)
@@ -67,10 +93,18 @@ public class UnlockUI : MonoBehaviour
 
         Debug.Log($"{cb.data.Name}이(가) 해금되었습니다!");
         RefreshVisual();
+        OnUnlockUpdated?.Invoke();
     }
 
     private void ShowCharacterInfo(CharacterData data)
     {
-        Debug.Log($"[{data.Name}] HP:{data.MaxHp} / ATK:{data.AttackDamage}");
+        infoPanel.SetActive(true);
+        image.sprite = data.myImage;
+        nameText.text = data.name;
+        type.text = data.CharacterType.ToString();
+        maxHp.text = data.MaxHp.ToString();
+        attackSpeed.text = data.AttackSpeed.ToString();
+        attackDamage.text = data.AttackDamage.ToString();
+        attackRange.text = data.AttackRange.ToString();
     }
 }

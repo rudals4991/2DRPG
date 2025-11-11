@@ -28,7 +28,6 @@ public class CoinManager : MonoBehaviour, IManagerBase
     }
     public bool UseCoin(int coin)
     { 
-        if(coin <= 0) return false;
         if (currentCoin < coin) return false;
         currentCoin -= coin;
         OnCoinChanged?.Invoke(currentCoin);

@@ -16,6 +16,7 @@ MonoBehaviour:
   AttackType: 0
   Name: WarriorB
   TypeIndex: 1
+  myImage: {fileID: 21300000, guid: 64efa861bb1a6594094eb50c19d04462, type: 3}
   MaxHp: 150
   NowHp: 0
   MoveSpeed: 10

@@ -15,6 +15,8 @@ MonoBehaviour:
   CharacterType: 7
   AttackType: 0
   Name: Monster_WarriorA
+  TypeIndex: 0
+  myImage: {fileID: 21300000, guid: 8a16b5a3ca0f7104f894dc486435015c, type: 3}
   MaxHp: 150
   NowHp: 150
   MoveSpeed: 8
@@ -22,3 +24,4 @@ MonoBehaviour:
   AttackDamage: 7
   AttackRange: 2
   Cost: 0
+  IsUnlocked: 0

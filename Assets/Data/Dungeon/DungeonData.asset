@@ -18,11 +18,3 @@ MonoBehaviour:
   monsterList:
   - monsterData: {fileID: 11400000, guid: f08acce61e1c04d449ba59c7293442e8, type: 2}
     count: 2
-  - monsterData: {fileID: 11400000, guid: 99e4c4c1357fffe44aea380c00045d54, type: 2}
-    count: 1
-  - monsterData: {fileID: 11400000, guid: 5378ed99f2d2ddb4cb23f795a17f0b61, type: 2}
-    count: 3
-  - monsterData: {fileID: 11400000, guid: c6884839b036f91468b82f1c12869a80, type: 2}
-    count: 1
-  - monsterData: {fileID: 11400000, guid: 46ffdd33eb20fc24b87408957b86c152, type: 2}
-    count: 4

@@ -16,6 +16,7 @@ MonoBehaviour:
   AttackType: 0
   Name: MeleeC
   TypeIndex: 2
+  myImage: {fileID: 21300000, guid: fefe3d900f2b35a41b35a9186feb11e5, type: 3}
   MaxHp: 150
   NowHp: 0
   MoveSpeed: 10
