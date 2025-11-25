@@ -13,6 +13,7 @@ public class PlayerBase : CharacterBase
     float _skillCoolTime;
 
     PoolManager pool;
+    CharacterManager characterManager;
     public static event Action<PlayerBase> OnPlayerDead;
     public PlayerSkill PlayerSkill { get; private set; }
     public PlayerStatus PlayerStatus => status as PlayerStatus;
@@ -32,6 +33,8 @@ public class PlayerBase : CharacterBase
         PlayerSkill = GetComponent<PlayerSkill>();
         pool = DIContainer.Resolve<PoolManager>();
         _skillCoolTime = skillCoolTime;
+        characterManager = DIContainer.Resolve<CharacterManager>();
+        characterManager.Register(this);
     }
     public override void Tick(float dt)
     {

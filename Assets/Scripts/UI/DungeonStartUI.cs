@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DungeonStartUI : MonoBehaviour
+public class DungeonStartUI : MonoBehaviour,IUIBase
 {
     [Header("던전 시작 버튼")]
     [SerializeField] private Button startButton;
@@ -13,16 +13,16 @@ public class DungeonStartUI : MonoBehaviour
     private PartyDataManager partyData;
     private StartManager startManager;
 
-    private IEnumerator Start()
+    public int Priority => 2;
+
+    private void Awake()
     {
-        // 버튼 등록
-        if (startButton != null)
-            startButton.onClick.AddListener(OnClickStart);
-
-        //  GameManager 초기화 완료 대기
+        UIManager.Register(this);
+    }
+    public IEnumerator Initialize()
+    {
         yield return GameManager.WaitUntilInitialized();
-
-        // 초기화 완료 후 Resolve
+        if (startButton != null) startButton.onClick.AddListener(OnClickStart);
         partyData = DIContainer.Resolve<PartyDataManager>();
         startManager = DIContainer.Resolve<StartManager>();
     }

@@ -22,6 +22,7 @@ public class CharacterManager : MonoBehaviour, IManagerBase
         yield return null;
         coinManager = DIContainer.Resolve<CoinManager>();
         LoadUnlockData();
+        LoadCharacterLevels();
     }
     public void Register(CharacterBase c)
     {
@@ -112,6 +113,33 @@ public class CharacterManager : MonoBehaviour, IManagerBase
         foreach (var data in allCharacterData)
         {
             SaveUnlockState(data);
+        }
+    }
+
+    public bool TryLevelUP(CharacterData data)
+    { 
+        if(data is null) return false;
+        if(!allCharacterData.Contains(data)) return false;
+        if(data.level >= data.MaxLevel) return false;
+        if (!coinManager.HasCoin(data.levelUpCost)) return false;
+        if (!coinManager.UseCoin(data.levelUpCost)) return false;
+        data.level++;
+        data.MaxHp += data.HpAmount;
+        data.AttackDamage += data.AttackAmount;
+        SaveCharacterLevel(data);
+        return true;
+    }
+    private void SaveCharacterLevel(CharacterData data)
+    {
+        PlayerPrefs.SetInt($"Level_{data.Name}", data.level);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadCharacterLevels()
+    {
+        foreach (var data in allCharacterData)
+        {
+            data.level = PlayerPrefs.GetInt($"Level_{data.Name}", 1);
         }
     }
 }

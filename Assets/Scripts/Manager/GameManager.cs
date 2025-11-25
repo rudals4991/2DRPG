@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(ManagerInitializer.InitializeAll());
         isInitialized = true;
         Initialized?.Invoke();
+        yield return StartCoroutine(uiManager.Initialize());
     }
     private void ExitManagers()
     { 

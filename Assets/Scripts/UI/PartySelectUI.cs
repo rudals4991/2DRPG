@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PartySelectUI : MonoBehaviour
+public class PartySelectUI : MonoBehaviour,IUIBase
 {
     [System.Serializable]
     public struct CharacterButton
@@ -22,13 +22,16 @@ public class PartySelectUI : MonoBehaviour
     private PartyDataManager partyData;
     private readonly List<CharacterData> selected = new();
 
-    private IEnumerator Start()
+    public int Priority => 1;
+
+    private void Awake()
     {
-        // GameManager 초기화가 완료될 때까지 대기
+        UIManager.Register(this);
+    }
+    public IEnumerator Initialize()
+    {
         yield return GameManager.WaitUntilInitialized();
         partyData = DIContainer.Resolve<PartyDataManager>();
-
-        // 버튼에 클릭 이벤트 등록
         foreach (var cb in characterButtons)
         {
             if (cb.button != null)
@@ -135,4 +138,5 @@ public class PartySelectUI : MonoBehaviour
     {
         Debug.Log(msg);
     }
+
 }

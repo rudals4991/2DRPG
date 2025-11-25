@@ -5,7 +5,6 @@ public class PlayerStatus : CharacterStatus
 {
     public int MaxMp { get; private set; }
     public int NowMp { get; private set; }
-    public int Level { get; private set; }
     public int Cost { get; private set; }
     public float CriticalRate { get; private set; }
     public int SkillMp { get; private set; }
@@ -13,7 +12,6 @@ public class PlayerStatus : CharacterStatus
     public PlayerStatus(CharacterData data, int maxMp, int cost, float criticalRate, int skillMp) : base(data)
     {
         Reset(data, maxMp, cost, criticalRate, skillMp);
-        Level = 1;
     }
     public bool TryUseSkill()
     {
@@ -26,12 +24,6 @@ public class PlayerStatus : CharacterStatus
         if (!IsAlive) return;
         NowMp = Math.Min(MaxMp, NowMp + amount);
         Debug.Log($"My Mana is {NowMp}");
-    }
-    public void LevelUp()
-    {
-        Level++;
-        //TODO: 레벨업 시 추가 능력치 상승
-        Debug.Log("레벨업!");
     }
     public void Reset(CharacterData data, int maxMp, int cost, float criticalRate, int skillMp)
     {

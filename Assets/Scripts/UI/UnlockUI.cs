@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UnlockUI : MonoBehaviour
+public class UnlockUI : MonoBehaviour,IUIBase
 {
     [System.Serializable]
     public struct CharacterButton
@@ -14,18 +14,19 @@ public class UnlockUI : MonoBehaviour
         public CharacterData data;
     }
     [SerializeField] CharacterButton[] characterButtons;
-    [SerializeField] GameObject infoPanel;
-    [SerializeField] Image image;
-    [SerializeField] TMP_Text nameText;
-    [SerializeField] TMP_Text type;
-    [SerializeField] TMP_Text maxHp;
-    [SerializeField] TMP_Text attackSpeed;
-    [SerializeField] TMP_Text attackDamage;
-    [SerializeField] TMP_Text attackRange;
+    [SerializeField] InfoUI infoPanel;
+
     CharacterManager characterManager;
+
+    public int Priority => 4;
+
     public static event Action OnUnlockUpdated;
 
-    private IEnumerator Start()
+    private void Awake()
+    {
+        UIManager.Register(this);
+    }
+    public IEnumerator Initialize()
     {
         yield return GameManager.WaitUntilInitialized();
         characterManager = DIContainer.Resolve<CharacterManager>();
@@ -55,7 +56,7 @@ public class UnlockUI : MonoBehaviour
     {
         if (cb.data.IsUnlocked)
         {
-            ShowCharacterInfo(cb.data);
+            infoPanel.Show(cb.data);
             return;
         }
 
@@ -94,17 +95,5 @@ public class UnlockUI : MonoBehaviour
         Debug.Log($"{cb.data.Name}이(가) 해금되었습니다!");
         RefreshVisual();
         OnUnlockUpdated?.Invoke();
-    }
-
-    private void ShowCharacterInfo(CharacterData data)
-    {
-        infoPanel.SetActive(true);
-        image.sprite = data.myImage;
-        nameText.text = data.name;
-        type.text = data.CharacterType.ToString();
-        maxHp.text = data.MaxHp.ToString();
-        attackSpeed.text = data.AttackSpeed.ToString();
-        attackDamage.text = data.AttackDamage.ToString();
-        attackRange.text = data.AttackRange.ToString();
     }
 }

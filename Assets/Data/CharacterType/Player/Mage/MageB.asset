@@ -25,3 +25,8 @@ MonoBehaviour:
   AttackRange: 7
   Cost: 50
   IsUnlocked: 0
+  level: 1
+  MaxLevel: 100
+  levelUpCost: 10
+  AttackAmount: 1
+  HpAmount: 2

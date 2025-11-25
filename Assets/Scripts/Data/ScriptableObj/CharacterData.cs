@@ -21,4 +21,11 @@ public class CharacterData : ScriptableObject
     [Header("해금")]
     public int Cost;                    // 해금 비용
     public bool IsUnlocked = false;     // 해금 여부
+
+    [Header("해금")]
+    public int level;                   // 레벨
+    public int MaxLevel;                // 최대레벨
+    public int levelUpCost;             // 레벨업 비용
+    public int AttackAmount;            // 공격력 증가량
+    public int HpAmount;                // 체력 증가량
 }
