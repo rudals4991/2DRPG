@@ -3,13 +3,13 @@ using UnityEngine;
 public abstract class CharacterBase : MonoBehaviour,IDamagable
 {
     [SerializeField] protected CharacterData data;
-    public CharacterMove Move { get; private set; }
-    public CharacterAttack Attack { get; private set; }
-    public CharacterDamaged Damaged { get; private set; }
-    public CharacterDead Dead { get; private set; }
-    public CharacterIDLE IDLE { get; private set; }
-    public Animator Animator { get; private set; }
-    public CharacterBase Target { get; private set; }
+    public CharacterMove Move { get; protected set; }
+    public CharacterAttack Attack { get; protected set; }
+    public CharacterDamaged Damaged { get; protected set; }
+    public CharacterDead Dead { get; protected set; }
+    public CharacterIDLE IDLE { get; protected set; }
+    public Animator Animator { get; protected set; }
+    public CharacterBase Target { get; protected set; }
 
     protected CharacterStatus status;
     protected CharacterBT characterBT;
@@ -27,7 +27,8 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
         Damaged = GetComponent<CharacterDamaged>();
         Dead = GetComponent<CharacterDead>();
         IDLE = GetComponent<CharacterIDLE>();
-        status = new CharacterStatus(data);
+        int level = SaveManager.Instance.GetCharacterLevel(data.ID);
+        status = new CharacterStatus(data,level);
         characterBT = new CharacterBT(this);
         attackInterval = data.AttackSpeed <= 0 ? 1f : 1f / data.AttackSpeed;
         attackCoolTime = 0f;

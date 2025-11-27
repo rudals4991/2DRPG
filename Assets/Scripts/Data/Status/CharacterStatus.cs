@@ -8,13 +8,18 @@ public class CharacterStatus
     public bool CanAttack { get; protected set; }
     public bool IsInStage { get; protected set; }
     public bool IsHit { get; protected set; }
+    public int AttackDamage { get; private set; }
     public int MaxHP => maxHp;
     public int NowHp => nowHp;
+    public int Level => level;
     private int maxHp;
     private int nowHp;
-    public CharacterStatus(CharacterData data)
+    private int level;
+    public CharacterStatus(CharacterData data, int level)
     {
-        Reset(data);
+        this.level = Mathf.Clamp(level, 1, data.MaxLevel);
+        SetStats(data);
+        Live();
     }
     public void SetInStage(bool value) => IsInStage = value;
     public void SetHit(bool value) => IsHit = value;
@@ -45,13 +50,16 @@ public class CharacterStatus
         IsAlive = true;
         IsHit = false;
     }
-    public virtual void Reset(CharacterData data)
+    public void SetStats(CharacterData data)
     {
-        maxHp = data.MaxHp;
+        maxHp = data.BaseMaxHp + data.HpAmount * (level - 1);
         nowHp = maxHp;
-        IsAlive = true;
-        CanAttack = false;
-        IsInStage = true;
-        IsHit = false;
+        AttackDamage = data.BaseAttackDamage + data.AttackAmount * (level - 1);
+    }
+    public virtual void Reset(CharacterData data,int level)
+    {
+        this.level = Mathf.Clamp(level, 1, data.MaxLevel);
+        SetStats(data);
+        Live();
     }
 }

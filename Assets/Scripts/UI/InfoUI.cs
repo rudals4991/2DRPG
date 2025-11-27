@@ -49,12 +49,14 @@ public class InfoUI : MonoBehaviour,IUIBase
     }
     public void UpdateUI()
     {
+        int level = SaveManager.Instance.GetCharacterLevel(currentData.ID);
+        CharacterStatus previewStatus = new CharacterStatus(currentData, level);
         image.sprite = currentData.myImage;
-        nameText.text = $"{currentData.Name}  Lv.{currentData.level}";
+        nameText.text = $"{currentData.Name}  Lv.{level}";
         type.text = currentData.CharacterType.ToString();
-        maxHp.text = currentData.MaxHp.ToString();
+        maxHp.text = previewStatus.MaxHP.ToString();
         attackSpeed.text = currentData.AttackSpeed.ToString();
-        attackDamage.text = currentData.AttackDamage.ToString();
+        attackDamage.text = previewStatus.AttackDamage.ToString();
         attackRange.text = currentData.AttackRange.ToString();
     }
 }

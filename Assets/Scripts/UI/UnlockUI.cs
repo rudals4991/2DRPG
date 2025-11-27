@@ -30,7 +30,6 @@ public class UnlockUI : MonoBehaviour,IUIBase
     {
         yield return GameManager.WaitUntilInitialized();
         characterManager = DIContainer.Resolve<CharacterManager>();
-        characterManager.LoadUnlockData();
         foreach (var cb in characterButtons)
         {
             characterManager.RegisterCharacterData(cb.data);
@@ -54,7 +53,9 @@ public class UnlockUI : MonoBehaviour,IUIBase
     }
     private void OnClickCharacter(CharacterButton cb)
     {
-        if (cb.data.IsUnlocked)
+        bool unlocked = SaveManager.Instance.GetCharacterUnlocked(cb.data.ID);
+
+        if (unlocked)
         {
             infoPanel.Show(cb.data);
             return;
@@ -66,8 +67,9 @@ public class UnlockUI : MonoBehaviour,IUIBase
     {
         foreach (var cb in characterButtons)
         {
-            bool unlocked = cb.data.IsUnlocked;
-            if (cb.lockOverlay != null) cb.lockOverlay.gameObject.SetActive(!unlocked);
+            bool unlocked = SaveManager.Instance.GetCharacterUnlocked(cb.data.ID);
+            if (cb.lockOverlay != null)
+                cb.lockOverlay.gameObject.SetActive(!unlocked);
         }
     }
     private void ShowUnlock(CharacterButton cb)

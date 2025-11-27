@@ -4,6 +4,7 @@ using UnityEngine;
 public class CharacterData : ScriptableObject
 {
     [Header("기본 정보")]
+    public int ID;                      // 고유 번호
     public CharacterType CharacterType; // 역할
     public AttackType AttackType;       // 공격방식
     public string Name;                 // 이름
@@ -11,21 +12,18 @@ public class CharacterData : ScriptableObject
     public Sprite myImage;              // 대표 이미지
 
     [Header("스탯")]
-    public int MaxHp;                   // 최대체력
-    public int NowHp;                   // 현재체력
+    public int BaseMaxHp;               // 최대체력
     public float MoveSpeed;             // 이동속도
     public float AttackSpeed;           // 공격속도
-    public int AttackDamage;            // 기본 공격 데미지
+    public int BaseAttackDamage;        // 기본 공격 데미지
     public int AttackRange;             // 공격 사거리
 
     [Header("해금")]
     public int Cost;                    // 해금 비용
-    public bool IsUnlocked = false;     // 해금 여부
 
-    [Header("해금")]
-    public int level;                   // 레벨
+    [Header("성장")]
     public int MaxLevel;                // 최대레벨
-    public int levelUpCost;             // 레벨업 비용
+    public int LevelUpCost;             // 레벨업 비용
     public int AttackAmount;            // 공격력 증가량
     public int HpAmount;                // 체력 증가량
 }

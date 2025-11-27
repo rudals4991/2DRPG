@@ -9,9 +9,10 @@ public class PlayerStatus : CharacterStatus
     public float CriticalRate { get; private set; }
     public int SkillMp { get; private set; }
     public bool CanUseSkill => IsAlive && NowMp >= SkillMp;
-    public PlayerStatus(CharacterData data, int maxMp, int cost, float criticalRate, int skillMp) : base(data)
+    public PlayerStatus(CharacterData data, int level, int maxMp, int cost, float criticalRate, int skillMp)
+        : base(data,level)
     {
-        Reset(data, maxMp, cost, criticalRate, skillMp);
+        Reset(data, level, maxMp, cost, criticalRate, skillMp);
     }
     public bool TryUseSkill()
     {
@@ -25,9 +26,9 @@ public class PlayerStatus : CharacterStatus
         NowMp = Math.Min(MaxMp, NowMp + amount);
         Debug.Log($"My Mana is {NowMp}");
     }
-    public void Reset(CharacterData data, int maxMp, int cost, float criticalRate, int skillMp)
+    public void Reset(CharacterData data, int level, int maxMp, int cost, float criticalRate, int skillMp)
     {
-        base.Reset(data);
+        base.Reset(data, level);
         MaxMp = maxMp;
         NowMp = 0;
         Cost = cost;

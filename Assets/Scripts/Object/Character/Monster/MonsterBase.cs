@@ -29,7 +29,7 @@ public class MonsterBase : CharacterBase
             if (pool is null) Destroy(gameObject);
             else
             {
-                status.Reset(data);
+                status.Reset(data,1);
                 pool.MonsterPool.Release(data, gameObject);
             }
             cm.Unregister(this);

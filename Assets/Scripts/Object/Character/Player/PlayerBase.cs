@@ -11,7 +11,7 @@ public class PlayerBase : CharacterBase
     [Header("Skill CoolTime")]
     [SerializeField] float skillCoolTime = 5f;
     float _skillCoolTime;
-
+    int level;
     PoolManager pool;
     CharacterManager characterManager;
     public static event Action<PlayerBase> OnPlayerDead;
@@ -28,13 +28,27 @@ public class PlayerBase : CharacterBase
     }
     public override void Initialize(CharacterData data)
     {
-        base.Initialize(data);
-        status = new PlayerStatus(data, maxMp, data.Cost, criticalRate, skillMp);
+        this.data = data;
+
+        level = SaveManager.Instance.GetCharacterLevel(data.ID);
+
+        Animator = GetComponentInChildren<Animator>();
+        Move = GetComponent<CharacterMove>();
+        Attack = GetComponent<CharacterAttack>();
+        Damaged = GetComponent<CharacterDamaged>();
+        Dead = GetComponent<CharacterDead>();
+        IDLE = GetComponent<CharacterIDLE>();
+
+        status = new PlayerStatus(data, level, maxMp, data.Cost, criticalRate, skillMp);
+
         PlayerSkill = GetComponent<PlayerSkill>();
         pool = DIContainer.Resolve<PoolManager>();
-        _skillCoolTime = skillCoolTime;
         characterManager = DIContainer.Resolve<CharacterManager>();
         characterManager.Register(this);
+
+        _skillCoolTime = skillCoolTime;
+
+        characterBT = new CharacterBT(this);
     }
     public override void Tick(float dt)
     {
@@ -73,8 +87,7 @@ public class PlayerBase : CharacterBase
         if (status.NowHp <= 0)
         {
             OnPlayerDead?.Invoke(this);
-            var cm = DIContainer.Resolve<CharacterManager>();
-            foreach (var c in cm.AllCharacters)
+            foreach (var c in characterManager.AllCharacters)
             {
                 if (c.Target == this) c.SetTarget(null);
             }
@@ -84,7 +97,7 @@ public class PlayerBase : CharacterBase
             if (pool is null) Destroy(gameObject);
             else
             {
-                PlayerStatus.Reset(data, maxMp, data.Cost, criticalRate, skillMp);
+                PlayerStatus.Reset(data, level, maxMp, data.Cost, criticalRate, skillMp);
                 pool.PlayerPool.Release(data, gameObject);
             }
             cm.Unregister(this);

@@ -30,7 +30,7 @@ public class CharacterAttack : MonoBehaviour
             if (character is PlayerBase && target.GetComponent<PlayerBase>() != null) continue;
             if (character is MonsterBase && target.GetComponent<MonsterBase>() != null) continue;
 
-            damage.ApplyDamage(character.Data.AttackDamage);
+            damage.ApplyDamage(character.Status.AttackDamage);
             isHit = true;
         }
     }
@@ -42,7 +42,7 @@ public class CharacterAttack : MonoBehaviour
         Vector2 dir = (character.Target.transform.position - character.transform.position).normalized;
         if (attacker.TryGetComponent(out RangeAttack range))
         {
-            range.Initialize(character, character.Target, dir, character.Data.AttackDamage);
+            range.Initialize(character, character.Target, dir, character.Status.AttackDamage);
         }
     }
     public void ControlRangeAttack(RangeAttack range)
@@ -56,7 +56,7 @@ public class CharacterAttack : MonoBehaviour
         Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, character.Data.AttackRange);
         foreach (var target in targets)
         {
-            if (target.TryGetComponent(out PlayerBase player)) player.Status.Heal(character.Data.AttackDamage);
+            if (target.TryGetComponent(out PlayerBase player)) player.Status.Heal(character.Status.AttackDamage);
         }
     }
     public void Buff()

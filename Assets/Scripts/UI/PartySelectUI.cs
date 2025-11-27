@@ -62,7 +62,8 @@ public class PartySelectUI : MonoBehaviour,IUIBase
 
     private void OnClickCharacter(CharacterButton cb)
     {
-        if (!cb.data.IsUnlocked)
+        bool unlocked = SaveManager.Instance.GetCharacterUnlocked(cb.data.ID);
+        if (!unlocked)
         {
             Debug.Log("해금되지 않은 캐릭터입니다.");
             return;
@@ -112,10 +113,11 @@ public class PartySelectUI : MonoBehaviour,IUIBase
         // 선택된 캐릭터는 버튼을 비활성화 (혹은 색상 변경)
         foreach (var cb in characterButtons)
         {
-            bool isUnlocked = cb.data.IsUnlocked;
+            bool unlocked = SaveManager.Instance.GetCharacterUnlocked(cb.data.ID);
             bool isSelected = selected.Contains(cb.data);
-            if (cb.lockOverlay) cb.lockOverlay.gameObject.SetActive(!isUnlocked);
-            if (cb.button) cb.button.interactable = isUnlocked && !isSelected;
+
+            if (cb.lockOverlay) cb.lockOverlay.gameObject.SetActive(!unlocked);
+            if (cb.button) cb.button.interactable = unlocked && !isSelected;
         }
         // 슬롯 이미지 갱신
         for (int i = 0; i < slotImages.Length; i++)
