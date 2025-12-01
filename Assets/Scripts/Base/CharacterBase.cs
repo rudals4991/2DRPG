@@ -19,6 +19,11 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
     float attackInterval;
 
     public CharacterData Data => data;
+
+    protected virtual CharacterStatus CreateStatus(CharacterData data, int level)
+    { 
+        return new CharacterStatus(data, level);
+    }
     public virtual void Initialize()                         // 초기화
     {
         Animator = GetComponentInChildren<Animator>();
@@ -28,7 +33,8 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
         Dead = GetComponent<CharacterDead>();
         IDLE = GetComponent<CharacterIDLE>();
         int level = SaveManager.Instance.GetCharacterLevel(data.ID);
-        status = new CharacterStatus(data,level);
+        status = CreateStatus(data, level);
+        status.SetInStage(true);
         characterBT = new CharacterBT(this);
         attackInterval = data.AttackSpeed <= 0 ? 1f : 1f / data.AttackSpeed;
         attackCoolTime = 0f;
@@ -36,6 +42,7 @@ public abstract class CharacterBase : MonoBehaviour,IDamagable
         Damaged.OnDamaged += OnDamaged;
         cm = DIContainer.Resolve<CharacterManager>();
         cm.Register(this);
+        Debug.Log($"{data.Name} 초기화 완료 → Target: {Target}");
     }
     public virtual void Initialize(CharacterData data)
     {

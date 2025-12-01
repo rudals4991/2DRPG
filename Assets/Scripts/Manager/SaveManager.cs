@@ -73,6 +73,10 @@ public class SaveManager
             ? unlocked
             : false;
     }
+    public List<int> GetParty()
+    {
+        return data.PartySlots ?? new();
+    }
     public void SetCharacterLevel(int id, int level)
     {
         levelDict[id] = level;
@@ -81,6 +85,26 @@ public class SaveManager
     public void SetCharacterUnlocked(int id, bool unlocked)
     {
         unlockedDict[id] = unlocked;
+        Save();
+    }
+    public void SetParty(List<int> ids)
+    {
+        data.PartySlots = new(ids);
+        Save();
+    }
+    public void SetCoin(int coin)
+    { 
+        data.Coin = coin;
+        Save();
+    }
+    public void SetCurrentStage(int stage)
+    {
+        data.CurrentStage = stage;
+        Save();
+    }
+    public void SetHighestStage(int stage)
+    {
+        data.HighestStage = Math.Max(data.HighestStage, stage);
         Save();
     }
     private void ConvertListsToDictionaries()
@@ -97,7 +121,6 @@ public class SaveManager
             levelDict[e.ID] = e.Level;
         }
     }
-
     private void ConvertDictionariesToLists()
     {
         data.CharacterUnlocked = new List<CharacterUnlockEntry>();
@@ -118,5 +141,10 @@ public class SaveManager
                 Level = kvp.Value
             });
         }
+    }
+    public void ResetSave()
+    {
+        CreateDefaultData();
+        Save();
     }
 }

@@ -10,7 +10,6 @@ public class CoinManager : MonoBehaviour, IManagerBase
 
     public void Exit()
     {
-        SaveCoin();
     }
 
     public IEnumerator Initialize()
@@ -18,20 +17,21 @@ public class CoinManager : MonoBehaviour, IManagerBase
         DIContainer.Register(this);
         yield return null;
         LoadCoin();
+        OnCoinChanged?.Invoke(currentCoin);
     }
     public void AddCoin(int coin)
     {
         if (coin <= 0) return;
         currentCoin += coin;
+        SaveManager.Instance.SetCoin(currentCoin);
         OnCoinChanged?.Invoke(currentCoin);
-        SaveCoin();
     }
     public bool UseCoin(int coin)
     { 
         if (currentCoin < coin) return false;
         currentCoin -= coin;
+        SaveManager.Instance.SetCoin(currentCoin);
         OnCoinChanged?.Invoke(currentCoin);
-        SaveCoin();
         return true;
     }
     public bool HasCoin(int coin)
@@ -39,14 +39,8 @@ public class CoinManager : MonoBehaviour, IManagerBase
         return currentCoin >= coin;
     }
     public int GetCurrentCoin() => currentCoin;
-    public void SaveCoin()
-    {
-        PlayerPrefs.SetInt("PlayerCoin", currentCoin);
-        PlayerPrefs.Save();
-        Debug.Log($"현재 코인 = {currentCoin}");
-    }
     public void LoadCoin()
     {
-        currentCoin = PlayerPrefs.GetInt("PlayerCoin", 0);
+        currentCoin = SaveManager.Instance.Data.Coin;
     }
 }

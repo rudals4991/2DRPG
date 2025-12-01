@@ -30,16 +30,20 @@ public class TargetManager : MonoBehaviour, IManagerBase
     {
         if (characterManager is null) return;
         var characters = characterManager.AllCharacters;
-        if (characters is null) Debug.Log("characters is null");
+
         foreach (var character in characters)
         {
+            // 1. 각 캐릭터 태그 확인
+
             if (!character.Status.IsAlive)
             {
                 character.SetTarget(null);
                 continue;
             }
 
-            if (character.Target != null && character.Target.Status.IsAlive && 
+            // 2. 기존 타겟 유지 조건 체크
+            if (character.Target != null &&
+                character.Target.Status.IsAlive &&
                 IsEnemy(character, character.Target)) continue;
 
             CharacterBase nearest = null;
@@ -49,16 +53,19 @@ public class TargetManager : MonoBehaviour, IManagerBase
             {
                 if (potential == character) continue;
                 if (!potential.Status.IsAlive) continue;
-                if (!IsEnemy(character, potential)) continue;
+
+                bool enemyCheck = IsEnemy(character, potential);
 
                 float dist = Vector2.Distance(character.transform.position, potential.transform.position);
+
+                if (!enemyCheck) continue;
+
                 if (dist < minDist)
                 {
                     minDist = dist;
                     nearest = potential;
                 }
             }
-
             character.SetTarget(nearest);
         }
     }

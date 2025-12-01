@@ -6,6 +6,10 @@ public class MonsterBase : CharacterBase
     PoolManager pool;
 
     public static event Action<MonsterBase> OnMonsterDie;
+    protected override CharacterStatus CreateStatus(CharacterData data, int level)
+    {
+        return new CharacterStatus(data, 1);
+    }
     public override void Initialize(CharacterData data)
     {
         base.Initialize(data);
@@ -18,7 +22,7 @@ public class MonsterBase : CharacterBase
         if (status.NowHp <= 0)
         {
             OnMonsterDie?.Invoke(this);
-            var cm = DIContainer.Resolve<CharacterManager>();
+
             foreach (var c in cm.AllCharacters)
             {
                 if (c.Target == this) c.SetTarget(null);

@@ -96,5 +96,8 @@ public class CharacterManager : MonoBehaviour, IManagerBase
 
         return true;
     }
-
+    public CharacterData GetCharacterDataByID(int id)
+    {
+        return allCharacterData.Find(c => c.ID == id);
+    }
 }

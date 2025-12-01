@@ -10,7 +10,7 @@ public class MoveNode : NodeBase
     }
     public override NodeStatus Execute()
     {
-        if (character.Move is null) return LogAndReturn( NodeStatus.Fail);
+        if (character.Move is null) return LogAndReturn(NodeStatus.Fail);
         if (character.Target is null)
         {
             character.Move.Stop();

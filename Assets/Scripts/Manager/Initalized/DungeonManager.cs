@@ -42,8 +42,12 @@ public class DungeonManager : MonoBehaviour, IManagerBase
         if (!partyDataManager.HasPartyData()) return;
         currentDungeon = dungeonDataManager.GetDungeonData(dungeonId);
         if (currentDungeon == null) return;
+        SaveManager.Instance.SetCurrentStage(dungeonId);
         SpawnParty();
         SpawnMonsters();
+        TargetManager tm = DIContainer.Resolve<TargetManager>();
+        if (tm is null) Debug.Log("Nullnullnull");
+        else tm.UpdateTarget();
     }
     private void SpawnParty()
     {
@@ -181,6 +185,8 @@ public class DungeonManager : MonoBehaviour, IManagerBase
         coinManager = DIContainer.Resolve<CoinManager>();
         int reward = currentDungeon.rewardCoin;
         coinManager.AddCoin(reward);
+        SaveManager.Instance.SetHighestStage(currentDungeon.dungeonId);
+        SaveManager.Instance.SetCurrentStage(currentDungeon.dungeonId);
         ExitDungeon();
         //TODO: UI를 통한 연출 추가
     }

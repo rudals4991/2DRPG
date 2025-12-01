@@ -18,37 +18,28 @@ public class PlayerBase : CharacterBase
     public PlayerSkill PlayerSkill { get; private set; }
     public PlayerStatus PlayerStatus => status as PlayerStatus;
     public bool IsSkillOffCooldown => _skillCoolTime <= 0f;
-    public bool CanUseSkill        // MP + 쿨타임 모두 충족
+    public bool CanUseSkill => PlayerStatus != null && PlayerStatus.CanUseSkill && IsSkillOffCooldown;
+    protected override CharacterStatus CreateStatus(CharacterData data, int level)
     {
-        get
-        {
-            var ps = status as PlayerStatus;
-            return ps != null && ps.CanUseSkill && IsSkillOffCooldown;
-        }
+        return new PlayerStatus(
+            data,
+            level,
+            maxMp,
+            data.Cost,
+            criticalRate,
+            skillMp
+        );
     }
     public override void Initialize(CharacterData data)
     {
         this.data = data;
-
+        base.Initialize(data);
         level = SaveManager.Instance.GetCharacterLevel(data.ID);
-
-        Animator = GetComponentInChildren<Animator>();
-        Move = GetComponent<CharacterMove>();
-        Attack = GetComponent<CharacterAttack>();
-        Damaged = GetComponent<CharacterDamaged>();
-        Dead = GetComponent<CharacterDead>();
-        IDLE = GetComponent<CharacterIDLE>();
-
-        status = new PlayerStatus(data, level, maxMp, data.Cost, criticalRate, skillMp);
 
         PlayerSkill = GetComponent<PlayerSkill>();
         pool = DIContainer.Resolve<PoolManager>();
-        characterManager = DIContainer.Resolve<CharacterManager>();
-        characterManager.Register(this);
 
         _skillCoolTime = skillCoolTime;
-
-        characterBT = new CharacterBT(this);
     }
     public override void Tick(float dt)
     {
@@ -65,18 +56,11 @@ public class PlayerBase : CharacterBase
     public bool TryCastSkill()
     {
         if (!Status.IsAlive || !IsSkillOffCooldown) return false;
-
-        var ps = status as PlayerStatus;
-        if (ps == null || !ps.CanUseSkill) return false;
+        if (!CanUseSkill) return false;
         if (PlayerSkill == null) return false;
         Animator.SetTrigger("Skill");
-        // 실제 스킬 수행
         if (!PlayerSkill.UseSkill()) return false;
-
-        // MP 소모
-        if (!ps.TryUseSkill()) return false;
-
-        // 쿨다운 시작
+        if (!PlayerStatus.TryUseSkill()) return false;
         _skillCoolTime = skillCoolTime;
         return true;
     }
